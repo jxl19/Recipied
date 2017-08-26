@@ -5,6 +5,12 @@ const initialState = {
     ingredient: ''
 }
 
+export const SEND_RECIPE = 'SEND_RECIPE';
+export const sendRecipe = (recipeName) => ({
+    type: SEND_RECIPE,
+    recipeName
+})
+
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const addRecipe = (recipeName, ingredient) => ({
     type: ADD_RECIPE,
@@ -12,26 +18,40 @@ export const addRecipe = (recipeName, ingredient) => ({
     ingredient
 });
 
+
 export const GET_RECIPE = 'GET_RECIPE';
 export const getRecipe = (recipeName) => ({
     type: GET_RECIPE,
-    recipeName
+    recipeName: recipeName.map((x)=>{
+        return x.dishName;
+    }),
+    ingredient: recipeName.map((x) => {
+        console.log(x.ingredients);
+        return x.ingredients;
+    })
 });
 
 export const recipeReducer = (state = initialState, action) => {
     if (action.type === ADD_RECIPE) {
         console.log(action.recipeName);
         console.log(action.ingredient);
-        return Object.assign({}, state, {
+        state =  Object.assign({}, state, {
             recipeName: action.recipeName,
             ingredient: action.ingredient
         });
-        if (action.type === GET_RECIPE) {
-            return Object.assign({}, state, {
-                recipeName: action.recipeName
-            });
-        }
+        return state;
     }
+    if (action.type === GET_RECIPE) {
+        console.log(action.recipeName);
+        console.log(action.ingredient);
+        //action.recipe name is the whoe payload... 
+        state =  Object.assign({}, state, {
+            recipeName: action.recipeName,
+            ingredient: action.ingredient
+        });
+        return state; 
+    }
+    return state;
 };
 
 export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
@@ -54,6 +74,10 @@ export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
             }
             return res.json();
         })
+        .then(res => {
+            console.log({recipeName, ingredient})
+            dispatch(addRecipe(recipeName, ingredient))
+        })
 }
 
 export const getReciped = (recipeName) => (dispatch) => {
@@ -72,7 +96,7 @@ export const getReciped = (recipeName) => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log(res);
+            console.log(res)
             dispatch(getRecipe(res));
         })
         .catch(err => console.log(`error getting recipes ${err}`))
