@@ -2,7 +2,8 @@ import { API_BASE_URL } from './config'
 
 const initialState = {
     recipeName: '',
-    ingredient: ''
+    ingredient: '',
+    recipes: []
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -22,13 +23,7 @@ export const addRecipe = (recipeName, ingredient) => ({
 export const GET_RECIPE = 'GET_RECIPE';
 export const getRecipe = (recipeName) => ({
     type: GET_RECIPE,
-    recipeName: recipeName.map((x)=>{
-        return x.dishName;
-    }),
-    ingredient: recipeName.map((x) => {
-        console.log(x.ingredients);
-        return x.ingredients;
-    })
+    payload: recipeName
 });
 
 export const recipeReducer = (state = initialState, action) => {
@@ -42,14 +37,21 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === GET_RECIPE) {
-        console.log(action.recipeName);
-        console.log(action.ingredient);
+        console.log(action.payload);
+        // console.log(action.ingredient);
         //action.recipe name is the whoe payload... 
         state =  Object.assign({}, state, {
-            recipeName: action.recipeName,
-            ingredient: action.ingredient
+            recipes: action.payload
         });
         return state; 
+    
+    }
+    if (action.type === SEND_RECIPE) {
+        console.log(action.recipeName);
+        state = Object.assign({}, state, {
+            recipeName: action.recipeName
+        });
+        return state;
     }
     return state;
 };
