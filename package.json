@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "browser-router": "^0.2.0",
+    "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

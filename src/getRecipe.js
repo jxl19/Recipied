@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getReciped } from './reducer';
-import store from './store';
+import { loadRecipe } from './reducer';
+import { push } from 'react-router-redux';
+import store, { history } from './store';
 //maybe render new route on submit to put out the information.
 class GetRecipe extends React.Component {
-    componentWillMount() {
-        store.dispatch(getReciped());
-    }
     onSubmit(e) {
         e.preventDefault();
         const recipe = this.recipe.value;
-        this.props.dispatch(getReciped(recipe));
+        this.props.dispatch(loadRecipe(recipe));
+        console.log('test')
+        this.props.dispatch(push('/recipepage'));
+        console.log(recipe);
     }
     render() {
         return (
@@ -26,17 +27,13 @@ class GetRecipe extends React.Component {
                     />
                 </div>
                 <div className="form-group">
-                    <button className="btn-btn-primary btn-lg">
-                        Submit
+                    <button className="btn-btn-primary btn-lg"
+                    >Submit
                     </button>
                 </div>
             </form>
         )
     }
 }
-
-// const mapStateToProps = (state) => ({
-//     existingRecipes: state.recipeReducer.recipeName
-// })
 
 export default connect()(GetRecipe);

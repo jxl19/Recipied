@@ -1,9 +1,11 @@
 import { API_BASE_URL } from './config'
+import { push } from 'react-router-redux';
 
 const initialState = {
     recipeName: '',
     ingredient: '',
-    recipes: []
+    recipes: [],
+    loadTo: ''
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -19,18 +21,25 @@ export const addRecipe = (recipeName, ingredient) => ({
     ingredient
 });
 
-
 export const GET_RECIPE = 'GET_RECIPE';
 export const getRecipe = (recipeName) => ({
     type: GET_RECIPE,
     payload: recipeName
 });
 
-export const recipeReducer = (state = initialState, action) => {
+export const LOAD_RECIPE = 'LOAD_RECIPE';
+export const loadRecipe = (recipeName) => ({
+    type: LOAD_RECIPE,
+    recipeName,
+});
+
+
+export const recipeReducer = (state, action) => {
+    state = state || initialState
     if (action.type === ADD_RECIPE) {
         console.log(action.recipeName);
         console.log(action.ingredient);
-        state =  Object.assign({}, state, {
+        state = Object.assign({}, state, {
             recipeName: action.recipeName,
             ingredient: action.ingredient
         });
@@ -40,16 +49,23 @@ export const recipeReducer = (state = initialState, action) => {
         console.log(action.payload);
         // console.log(action.ingredient);
         //action.recipe name is the whoe payload... 
-        state =  Object.assign({}, state, {
+        state = Object.assign({}, state, {
             recipes: action.payload
         });
-        return state; 
-    
+        return state;
+
     }
     if (action.type === SEND_RECIPE) {
         console.log(action.recipeName);
         state = Object.assign({}, state, {
             recipeName: action.recipeName
+        });
+        return state;
+    }
+    if (action.type === LOAD_RECIPE) {
+        console.log(action.recipeName);
+        state = Object.assign({}, state, {
+            loadTo: action.recipeName
         });
         return state;
     }
@@ -77,7 +93,7 @@ export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log({recipeName, ingredient})
+            console.log({ recipeName, ingredient })
             dispatch(addRecipe(recipeName, ingredient))
         })
 }
