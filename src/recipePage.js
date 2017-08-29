@@ -12,10 +12,9 @@ class RecipePage extends React.Component {
         let recipes = undefined;
         if (this.props.existingRecipes) {
             recipes = this.props.existingRecipes.map((recipe) => {
-
-                console.log("EXISTING RECIPE CHECK", this.props.existingRecipes, this.props.name);
+                console.log("EXISTING RECIPE CHECK", this.props.existingRecipes);
                 return (
-                    <li className="black-box recipe-item" key={recipe._id}>
+                    <li className="recipe-item" key={recipe._id}>
                         <div className="recipe">
                             <h2>{recipe.dishName}</h2>
                             <h3>{recipe.ingredients}</h3>
@@ -25,11 +24,12 @@ class RecipePage extends React.Component {
             }
             )
         }
-        else {
-            recipes = <li className="black-box">No Recipes here!</li>
+        else{
+            console.log('here')
+            recipes = <li>No Recipes here!</li>
         }
         return (
-
+            
             <div>
                 <form onSubmit={e => this.onSubmit(e)}>
                     <h2>Get Recipe</h2>
@@ -56,9 +56,9 @@ class RecipePage extends React.Component {
     }
 }
 
-RecipePage.defaultProps = {
-    title: 'salad'
-};
+// RecipePage.defaultProps = {
+//     title: 'salad'
+// };
 
 const mapStateToProps = (state) => ({
     existingRecipes: state.recipes,

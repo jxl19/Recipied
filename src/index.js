@@ -5,13 +5,14 @@ import App from './app';
 import store from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory';
 
 ReactDOM.render(
-    // <Router>
+                <Router>
         <Provider store={store}>
-            <App />
+            <App/>
         </Provider>
-    //  </Router>
+        </Router>
     ,
     document.getElementById('root')
 );

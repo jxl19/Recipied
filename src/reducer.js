@@ -1,11 +1,17 @@
 import { API_BASE_URL } from './config'
 import { push } from 'react-router-redux';
-
+//amazons3, imageurl uploaded to s3
+//function to take img, send to s3
+//or how to upload img from html/js - post req with binary content,etc
+//add step function
+//TODO:
+//create first page(login page) - when successfully loggedin, takes to homepage
+//homepage should have menubar to search or create, making them clickable
 const initialState = {
     recipeName: '',
     ingredient: '',
     recipes: [],
-    loadTo: ''
+    loadTo: '',
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -34,8 +40,7 @@ export const loadRecipe = (recipeName) => ({
 });
 
 
-export const recipeReducer = (state, action) => {
-    state = state || initialState
+export const recipeReducer = (state = initialState, action) => {
     if (action.type === ADD_RECIPE) {
         console.log(action.recipeName);
         console.log(action.ingredient);

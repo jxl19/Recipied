@@ -21,7 +21,7 @@ export const loginFinished = (cred) => ({
 
 export const login = (data) => (dispatch) => {
     console.log("login credentials", data)
-    fetch(`http://localhost:8080/users/login`, {
+    fetch(`http://localhost:8080/api/users/login`, {
         method: 'post',
         headers: {
             'Accept': 'application/json',

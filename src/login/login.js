@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { login } from  './reducer';
+import { login } from './reducer';
+
 const LogIn = (props) => {
     let username, password;
     function handleSubmit(e) {
@@ -33,7 +33,6 @@ const LogIn = (props) => {
         </div>
     );
 }
-
 const mapDispatchToProps = (dispatch) => ({
     login: (attributes) => {
         console.log("mapDispatchToProps logging out creds", attributes);
@@ -41,5 +40,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
     gotoSignup: () => dispatch(push('/signup'))
 })
-
 export default connect(null, mapDispatchToProps)(LogIn)
