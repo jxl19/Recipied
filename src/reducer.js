@@ -12,6 +12,7 @@ const initialState = {
     ingredient: '',
     recipes: [],
     loadTo: '',
+    isLoggedIn: false
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -39,6 +40,11 @@ export const loadRecipe = (recipeName) => ({
     recipeName,
 });
 
+export const LOGIN_FINISHED = 'LOGIN_FINISHED';
+export const loginFinished = (cred) => ({
+    type: LOGIN_FINISHED,
+    payload: cred
+})
 
 export const recipeReducer = (state = initialState, action) => {
     if (action.type === ADD_RECIPE) {
@@ -74,8 +80,36 @@ export const recipeReducer = (state = initialState, action) => {
         });
         return state;
     }
+    if (action.type === LOGIN_FINISHED) {
+        console.log(action.payload) 
+        state = Object.assign({}, initialState, {
+            isLoggedIn:action.payload
+        })
+        return state;
+    }
     return state;
 };
+
+export const login = (data) => (dispatch) => {
+    console.log("login credentials", data)
+    fetch('http://localhost:8080/api/users/login', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)      //username, password
+    }).then(res => {
+        //json info in here from server
+        // console.log(res.json());
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        res.json().then((data) => {
+            dispatch(loginFinished(data.status));
+        })
+    })
+}
 
 export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
     console.log("ATTRIBUTES ", recipeName, ingredient);
