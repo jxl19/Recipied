@@ -8,7 +8,7 @@ class HomePage extends React.Component {
         return (
             <nav>
                 <Link onClick={this.forceUpdate} to={'/recipepage'}>
-                <h1>test</h1>
+                <h1>recipepage</h1>
                 </Link>
             </nav>
 
