@@ -26,6 +26,7 @@ class RecipePage extends React.Component {
         }
         else{
             console.log('here')
+            console.log(this.props.existingRecipes);
             recipes = <li>No Recipes here!</li>
         }
         return (
