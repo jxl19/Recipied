@@ -1,5 +1,4 @@
 import { API_BASE_URL } from './config'
-import { push } from 'react-router-redux';
 //amazons3, imageurl uploaded to s3
 //function to take img, send to s3
 //or how to upload img from html/js - post req with binary content,etc

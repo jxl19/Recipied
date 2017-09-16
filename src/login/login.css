@@ -1,0 +1,41 @@
+.landing-page{
+    background-image: url("ingredient.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.header-about{
+    position: fixed;
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: normal;
+    background-color:rgba(88, 88, 68, 0.56);
+    width:100%;
+  }
+.header-about > h3{ 
+    color:rgba(211, 240, 243, 0.96);
+}
+.log-in-container{
+    margin: 0 auto;
+    float:none;
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    font-family: raleway;
+ }
+
+ .center{
+    border: 1px solid black;
+    border-radius:0.3rem;
+    margin: 0 auto;
+    padding: 40px;
+    background-color:rgba(255, 255, 255, 0.58);
+}
+
+.input-login{
+    border-radius: 5px;
+}

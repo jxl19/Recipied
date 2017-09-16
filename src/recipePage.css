@@ -1,0 +1,44 @@
+.recipe-form{
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left:21%;
+}
+
+.js-search-form{
+    margin-top:10px;
+}
+
+.jumbotron{
+    background-image: url("ingredient1.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    margin-top: -5px;
+}
+
+.search{
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.card {
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-left: 5%;
+}

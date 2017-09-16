@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getReciped } from './reducer';
-
+import './recipePage.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class RecipePage extends React.Component {
     onSubmit(e) {
         e.preventDefault();
@@ -14,42 +15,57 @@ class RecipePage extends React.Component {
             recipes = this.props.existingRecipes.map((recipe) => {
                 console.log("EXISTING RECIPE CHECK", this.props.existingRecipes);
                 return (
-                    <li className="recipe-item" key={recipe._id}>
-                        <div className="recipe">
-                            <h2>{recipe.dishName}</h2>
-                            <h3>{recipe.ingredients}</h3>
+                    <div className="card col-xs-5">
+                        <div className="card-block">
+                            <h4 className="card-title" key={recipe._id}>{recipe.dishName}</h4>
+                            <p className="card-block">{recipe.ingredients}</p>
+                            <a href="#" class="btn btn-primary">Go to recipe</a>
                         </div>
-                    </li>
+                        
+                    </div>
                 )
             }
             )
         }
-        else{
+        else {
             console.log('here')
             console.log(this.props.existingRecipes);
             recipes = <li>No Recipes here!</li>
         }
         return (
-            
+            //menu bar too thin
+            //remove searchbox img -- play with colros
             <div>
-                <form onSubmit={e => this.onSubmit(e)}>
-                    <h2>Get Recipe</h2>
-                    <div className="form-group">
-                        <label className="control-label">Recipe Name</label>
-                        <input
-                            type="text"
-                            name="getRecipe"
-                            className="form-control"
-                            ref={(input) => this.recipe = input}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button className="btn-btn-primary btn-lg"
-                        >Submit
-                    </button>
-                    </div>
+                <nav className="dashboard-nav">
+                    <h4 className="placeholder col-xs-2 text-center recipe-page" href="#">APPNAME</h4>
+                    <h4 className="recipe-page col-xs-2 text-center">Search Recipes</h4>
+                    <h4 className="recipe-page col-xs-2 text-center">
+                        placeholder
+                </h4>
+                    <h4 className="recipe-page col-xs-2 text-center">
+                        placeholder
+                </h4>
+                    <h4 className="recipe-page col-xs-2 text-center">
+                        placeholder
+                </h4>
+                <h4 className="recipe-page col-xs-2 text-center" id="signout">
+                        sign-out
+                </h4>
+                </nav>
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                <form className="js-search-form col-md-12" onSubmit={e => this.onSubmit(e)}>
+                            <div className="form-group">
+                                <input type="text" name="getRecipe" className="recipe-form col-md-6" placeholder="search for recipe" ref={(input) => this.recipe = input} />
+                                <div className="search col-md-1">
+                                    <i className="glyphicon glyphicon-search"></i>
+                                </div>
+                            </div>
                 </form>
-                <ul className="recipee">
+                        </div>
+                    </div>
+
+                <ul className="recipee col-xs-12">
                     {recipes}
                 </ul>
             </div>
