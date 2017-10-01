@@ -16,8 +16,11 @@
     margin-top:10px;
 }
 
+.jumbotron-bg{
+    background-color:rgba(238, 238, 220, 0.58) !important;
+}
+
 .jumbotron{
-    background-image: url("ingredient1.jpg");
     background-repeat:no-repeat;
     background-size:cover;
     height: 100%;

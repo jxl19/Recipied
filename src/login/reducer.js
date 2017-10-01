@@ -1,5 +1,4 @@
 import { API_BASE_URL } from '../config'
-import { push } from 'react-router-redux';
 
 const initialState = {
     isLoggedIn: false,

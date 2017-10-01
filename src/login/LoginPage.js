@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import LogIn from './login';
 import './login.css';
 
 class LoginPage extends React.Component {
     render() {
+        if (this.props.isLoggedIn) {
+            return <Redirect to='/homepage' />;
+        }
         return (
             <div className="landing-page">
                 <section className="about-landing">
@@ -18,4 +22,8 @@ class LoginPage extends React.Component {
     }
 }
 
-export default connect()(LoginPage);
+const mapStateToProps = (state) => ({
+    isLoggedIn: state.isLoggedIn
+})
+
+export default connect(mapStateToProps)(LoginPage);

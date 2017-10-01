@@ -1,31 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getReciped } from './reducer';
+import { getReciped, getId } from './reducer';
 import './recipePage.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import DashBoard from './DashBoard';
+import {Redirect} from 'react-router-dom';
+//make the other pages, delete and update requests on the client side
 class RecipePage extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         const recipe = this.recipe.value;
         this.props.dispatch(getReciped(recipe));
     }
+    handleClick(e, recipe) {
+        e.preventDefault();
+        console.log(recipe._id);
+        this.props.dispatch(getId(recipe._id));
+    }
     render() {
+        if(this.props.idSet) {
+            console.log(this.props.idSet);
+            return  <Redirect to={"/recipepage/" + this.props.id } /> 
+        }
+        console.log(this.props.isLoggedIn);
         let recipes = undefined;
         if (this.props.existingRecipes) {
-            recipes = this.props.existingRecipes.map((recipe) => {
+            recipes = this.props.existingRecipes.map((recipe, i) => {
                 console.log("EXISTING RECIPE CHECK", this.props.existingRecipes);
                 return (
-                    <div className="card col-xs-5">
+                    <div className="card col-xs-5" key={i}>
                         <div className="card-block">
-                            <h4 className="card-title" key={recipe._id}>{recipe.dishName}</h4>
+                            <h4 className="card-title">{recipe.dishName}</h4>
                             <p className="card-block">{recipe.ingredients}</p>
-                            <a href="#" class="btn btn-primary">Go to recipe</a>
+                            <div className ="btn btn-primary" onClick={(e) => this.handleClick(e, recipe)}>
+                                Go to recipe
+                            </div>
                         </div>
-                        
                     </div>
                 )
-            }
-            )
+            })
         }
         else {
             console.log('here')
@@ -33,26 +46,9 @@ class RecipePage extends React.Component {
             recipes = <li>No Recipes here!</li>
         }
         return (
-            //menu bar too thin
-            //remove searchbox img -- play with colros
             <div>
-                <nav className="dashboard-nav">
-                    <h4 className="placeholder col-xs-2 text-center recipe-page" href="#">APPNAME</h4>
-                    <h4 className="recipe-page col-xs-2 text-center">Search Recipes</h4>
-                    <h4 className="recipe-page col-xs-2 text-center">
-                        placeholder
-                </h4>
-                    <h4 className="recipe-page col-xs-2 text-center">
-                        placeholder
-                </h4>
-                    <h4 className="recipe-page col-xs-2 text-center">
-                        placeholder
-                </h4>
-                <h4 className="recipe-page col-xs-2 text-center" id="signout">
-                        sign-out
-                </h4>
-                </nav>
-                    <div className="jumbotron jumbotron-fluid">
+                <DashBoard />
+                    <div className="jumbotron jumbotron-fluid jumbotron-bg">
                         <div className="container">
                 <form className="js-search-form col-md-12" onSubmit={e => this.onSubmit(e)}>
                             <div className="form-group">
@@ -79,6 +75,9 @@ class RecipePage extends React.Component {
 
 const mapStateToProps = (state) => ({
     existingRecipes: state.recipes,
+    isLoggedIn: state.isLoggedIn,
+    id: state.id,
+    idSet: state.idSet
 })
 
 export default connect(mapStateToProps)(RecipePage);

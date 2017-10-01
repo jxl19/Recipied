@@ -5,14 +5,8 @@ import { login } from '../reducer';
 import { Redirect, withRouter } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
-
+//if theres token automatically redirect
 class LogIn extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            loginSuccess: false
-        };
-    }
 
     componentWillReceiveProps(newProps) {
         console.log('Component WILL RECIEVE PROPS!')
@@ -32,8 +26,8 @@ class LogIn extends React.Component {
         })
     }
     render() {
-        if (this.state.loginSuccess) {
-            return <Redirect to='/homepage' />;
+        if (this.props.isLoggedIn) {
+            return <Redirect to='/home' />;
         }
         return (
             // center login inputs and button

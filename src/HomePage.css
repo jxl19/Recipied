@@ -29,6 +29,7 @@
     height: 100%; 
     margin-top:0px;
     margin-bottom:0px;
+    line-height:50px;
 }
 
 .dashboard-nav{
@@ -36,5 +37,6 @@
     line-height: normal;
     background-color:rgba(171, 171, 89, 0.56);
     width:100%;
-    font-family: raleway
+    font-family: raleway;
+    height:50px;
 }
