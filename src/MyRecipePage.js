@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserName, getId, deleteRecipe } from './reducer';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
+import './MyRecipePage.css';
 //create delete and update requests for this component.
 // for delete just access the delete EP when clicked and delete it using id, use alert?
 // for update, change focus to the words on click, and add a update button when there is focus?
@@ -24,6 +25,7 @@ class MyRecipePage extends React.Component {
     render() {
         //make page for this updatepage, need new endpoint
         //the update page can look like a preview of the main page
+        //maybe a background for the card itself?
         if(this.props.idSet){
             console.log(this.props.idSet);
             return  <Redirect to={"/myrecipes/" + this.props.id } /> 
@@ -38,14 +40,16 @@ class MyRecipePage extends React.Component {
                 //create a delete button?
                 return (
                     <div className="card col-xs-5" key={i}>
-                        <div className="card-block">
-                            <h4 className="card-title">{recipes.dishName}</h4>
-                            <p className="card-block">{recipes.ingredients}</p>
-                            <div className ="btn btn-primary" onClick={(e) => this.handleClick(e, recipes)}>
-                                update recipe
-                            </div>
-                            <div className="delete btn btn-danger" onClick={(e) => this.handleDelete(e, recipes)}>
+                            <h4 className="card-header">{recipes.dishName}
+                            <div className="delete btn btn-danger pull-right" onClick={(e) => this.handleDelete(e, recipes)}>
                                 delete recipe
+                            </div>
+                            </h4>
+                        <div className="card-block">
+                            <div className="card-text">{recipes.ingredients}
+                            </div>
+                            <div className ="btn btn-primary update pull-right" onClick={(e) => this.handleClick(e, recipes)}>
+                                update recipe
                             </div>
                         </div>
                     </div>

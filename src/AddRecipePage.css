@@ -1,0 +1,18 @@
+.recipe-form{
+    border-radius: 0;
+    /* border: 1px solid black; */
+}
+
+.js-search-formm{
+    margin-left:3%;
+    margin-top: 50px;
+}
+
+.btn-success{
+    color:black;
+    background-color: rgba(148, 158, 95, 0.4);
+}
+
+.btn-success:hover{
+    background-color: rgba(148, 158, 95, 0.8);
+}

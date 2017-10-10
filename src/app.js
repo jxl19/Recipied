@@ -8,6 +8,7 @@ import SearchRecipePage from './SearchRecipePage';
 import AddRecipePage from './AddRecipePage';
 import MyRecipePage from './MyRecipePage';
 import UpdatePage from './UpdatePage';
+import ImageUpload from './ImageUpload';
 import { createBrowserHistory } from 'history';
 
 class App extends React.Component {
@@ -27,6 +28,7 @@ class App extends React.Component {
                         {/* :recipe is going to be the id key */}
                         <Route exact path="/recipepage/:id" component={SearchRecipePage} />
                         <Route exact path="/myrecipes/:id" component={UpdatePage} />
+                        <Route exact path ="/imageupload" component={ImageUpload} />
                         <Route exact path="/" render={() => (
                             loggedIn ? (<Redirect to="/home" />) : (<LoginPage />)
                         )} />

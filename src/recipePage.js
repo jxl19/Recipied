@@ -29,11 +29,10 @@ class RecipePage extends React.Component {
                 console.log("EXISTING RECIPE CHECK", this.props.existingRecipes);
                 return (
                     <div className="card col-xs-5" key={i}>
+                            <h4 className="card-header">{recipe.dishName}
+                            </h4>
                         <div className="card-block">
-                            <h4 className="card-title">{recipe.dishName}</h4>
-                            <p className="card-block">{recipe.ingredients}</p>
-                            <div className ="btn btn-primary" onClick={(e) => this.handleClick(e, recipe)}>
-                                Go to recipe
+                            <div className="card-text">{recipe.ingredients}
                             </div>
                         </div>
                     </div>

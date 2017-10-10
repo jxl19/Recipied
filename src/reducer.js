@@ -3,6 +3,8 @@ import { API_BASE_URL } from './config'
 const initialState = {
     recipeName: '',
     ingredient: '',
+    calories: '',
+    steps: '',
     recipes: [],
     loadTo: '',
     isLoggedIn: false,
@@ -13,7 +15,8 @@ const initialState = {
     username: '',
     userData: [],
     delRecipe: false,
-    clicked: false
+    clicked: false,
+    ingredientsList: []
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -23,10 +26,12 @@ export const sendRecipe = (recipeName) => ({
 })
 
 export const ADD_RECIPE = 'ADD_RECIPE';
-export const addRecipe = (recipeName, ingredient) => ({
+export const addRecipe = (recipeName, ingredient, calories, steps) => ({
     type: ADD_RECIPE,
     recipeName,
-    ingredient
+    ingredient,
+    calories,
+    steps
 });
 
 export const ADD_FINISHED = 'ADD_FINISHED';
@@ -87,13 +92,22 @@ export const dbClicked = (data) => ({
     payload: data
 })
 
+export const ADD_RLIST = 'ADD_RLIST';
+export const addRList = (recipe) => ({
+    type: ADD_RLIST,
+    payload:recipe
+});
+
 export const recipeReducer = (state = initialState, action) => {
+    console.log(action);
     if (action.type === ADD_RECIPE) {
         console.log(action.recipeName);
         console.log(action.ingredient);
         state = Object.assign({}, state, {
             recipeName: action.recipeName,
-            ingredient: action.ingredient
+            ingredient: action.ingredient,
+            calories: action.calories,
+            steps: action.steps
         });
         return state;
     }
@@ -174,6 +188,13 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
+    if (action.type === ADD_RLIST) {
+        console.log(state.ingredientsList);
+        state = Object.assign({}, state, {
+            ingredientsList: state.ingredientsList.concat(action.payload)
+        })
+        return state;
+    }
     return state;
 };
 var token;
@@ -238,8 +259,13 @@ export const getUserName = () => (dispatch) => {
         .catch(err => console.log(`${err}`))
 }
 
-export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
-    console.log("ATTRIBUTES ", recipeName, ingredient);
+export const testSubmit = (data) => (dispatch) => {
+    console.log('ATTRIBUTES', data);
+    
+}
+
+export const submitRecipe = (recipeName, ingredient, calories, steps) => (dispatch) => {
+    console.log("ATTRIBUTES ", recipeName, ingredient, calories, steps);
     fetch(`${API_BASE_URL}/recipes`,
         {
             method: 'POST',
@@ -249,7 +275,9 @@ export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
             },
             body: JSON.stringify({
                 dishName: recipeName,
-                ingredients: ingredient
+                ingredients: ingredient,
+                calories: calories,
+                steps: steps
             }),
         })
         .then(res => {
@@ -259,8 +287,8 @@ export const submitRecipe = (recipeName, ingredient) => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log({ recipeName, ingredient });
-            dispatch(addRecipe(recipeName, ingredient));
+            console.log({ recipeName, ingredient, calories, steps });
+            dispatch(addRecipe(recipeName, ingredient, calories, steps));
         })
         .then(() => {
             dispatch(addFinished(true));
@@ -327,4 +355,25 @@ export const updateRecipe = (id) => (dispatch) => {
             // dispatch(updateComplete());
         })
         .catch(err => console.log(`${err}`));
+}
+
+export const uploadImage = (img)  => (dispatch) => {
+    console.log(img);
+    let data = new FormData();
+    data.append('file', img);
+    data.append('name', img.name);
+
+    console.log("imgfile", img.name);
+    fetch(`${API_BASE_URL}/upload`,
+    {
+        method: 'POST',
+        headers: {
+            'Accept' : 'application/json',
+        },
+        body: data
+    })
+    .then(res => {
+        console.log(res);
+    })
+    .catch(err => console.log(`${err}`));
 }
