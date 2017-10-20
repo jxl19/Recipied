@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {dbClicked, loadTo} from './reducer';
+import {dbClicked, loadTo, logOut} from './reducer';
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
 
 class DashBoard extends React.Component {
     handleClick(e) {
@@ -10,14 +13,20 @@ class DashBoard extends React.Component {
         this.props.dispatch(dbClicked(true));
         this.props.dispatch(loadTo(e.target.id));
     }
+    logout(e){
+        e.preventDefault();
+        console.log('asd');
+        this.props.dispatch(dbClicked(true));
+        this.props.dispatch(logOut());
+    }
     render() {
         console.log(this.props.clicked);
         if (this.props.clicked) {
             console.log(this.props.redirectTo)
             this.props.dispatch(dbClicked(false));
+            history.push('/' + this.props.redirectTo);
             return <Redirect to= {"/" + this.props.redirectTo} />;
         }
-        // search box in middle, logo on top
         return (
             <nav className="dashboard-nav">
                 <div onClick={(e) => this.handleClick(e)}>
@@ -43,8 +52,8 @@ class DashBoard extends React.Component {
                         placeholder
                 </h4>
                 </div>
-                <div onClick={e => this.handleClick(e)}>
-                    <h4 className="recipe-page col-xs-2 text-center" id="signout">
+                <div onClick={e => this.logout(e)}>
+                    <h4 className="recipe-page col-xs-2 text-center" id="/">
                         sign-out
                 </h4>
                 </div>

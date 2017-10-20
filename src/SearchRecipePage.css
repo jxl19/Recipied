@@ -1,0 +1,30 @@
+.upper-container {
+    border: 1px solid black;
+}
+
+.middle-container{ 
+    border: 1px solid black;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.lower-container{ 
+    border: 1px solid black;
+}
+
+.ingredient-list{
+    font-size: 20px;
+}
+
+.step-list{
+    font-size: 20px;
+}
+
+.imagefile{
+    background-repeat:no-repeat;
+    height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+    overflow-x: hidden;
+}

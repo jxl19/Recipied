@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getReciped, getId } from './reducer';
+import { getReciped, getId, getUserName } from './reducer';
 import './recipePage.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import DashBoard from './DashBoard';
 import {Redirect} from 'react-router-dom';
 //make the other pages, delete and update requests on the client side
+import createHistory from 'history/createBrowserHistory'
+
+
+const history = createHistory()
 class RecipePage extends React.Component {
     onSubmit(e) {
         e.preventDefault();
+        var userid = sessionStorage.getItem('id');
+        console.log(userid);
         const recipe = this.recipe.value;
         this.props.dispatch(getReciped(recipe));
+        this.props.dispatch(getUserName(userid));
+        console.log('asd');
     }
     handleClick(e, recipe) {
         e.preventDefault();
@@ -20,8 +28,11 @@ class RecipePage extends React.Component {
     render() {
         if(this.props.idSet) {
             console.log(this.props.idSet);
+            history.push('/recipepage/' + this.props.id);
             return  <Redirect to={"/recipepage/" + this.props.id } /> 
         }
+        var userid = sessionStorage.getItem('id');
+        console.log(userid);
         console.log(this.props.isLoggedIn);
         let recipes = undefined;
         if (this.props.existingRecipes) {
@@ -35,6 +46,9 @@ class RecipePage extends React.Component {
                             <div className="card-text">{recipe.ingredients}
                             </div>
                         </div>
+                        <div className ="btn btn-primary pull-left" onClick={(e) => this.handleClick(e, recipe)}>
+                                Go to recipe
+                            </div>
                     </div>
                 )
             })
@@ -47,6 +61,8 @@ class RecipePage extends React.Component {
         return (
             <div>
                 <DashBoard />
+                <div className="logo"> 
+                </div>
                     <div className="jumbotron jumbotron-fluid jumbotron-bg">
                         <div className="container">
                 <form className="js-search-form col-md-12" onSubmit={e => this.onSubmit(e)}>

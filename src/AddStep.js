@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {addStepList} from './reducer';
 import './AddIngredient.css';
 class AddStep extends React.Component {
     constructor() {
@@ -9,6 +10,15 @@ class AddStep extends React.Component {
         steps: [{ name: '' }],
       };
     }
+
+    handleNameChange = (idx) => (evt) => {
+      const newName = this.state.steps.map((steps, sidx) => {
+        if (idx !== sidx) return steps;
+        return { ...steps, name: evt.target.value };
+      });
+      
+      this.setState({ steps: newName });
+    }
     
     handleSubmit = (evt) => {
       const { name, steps } = this.state;
@@ -16,7 +26,9 @@ class AddStep extends React.Component {
     }
     
     handleAddSteps = () => {
+      console.log(this.steps.value);
       this.setState({ steps: this.state.steps.concat([{ name: '' }]) });
+      this.props.dispatch(addStepList(this.steps.value))
     }
     
     handleRemoveSteps = (idx) => () => {
@@ -27,13 +39,14 @@ class AddStep extends React.Component {
       return (
         <div className="steps">
           {this.state.steps.map((steps, idx) => (
-            <div>
+            <div key ={idx}>
               <input
                 type="text"
                 name ="steps"
                 className="recipe-form col-md-6"
                 placeholder={`Step #${idx + 1}`}
-                value={steps.name}/>
+                onChange={this.handleNameChange(idx)}
+                ref={(input) => this.steps = input}/>
           <button type="button" onClick={this.handleAddSteps} className="small pull-left">+</button>
               <button type="button" onClick={this.handleRemoveSteps(idx)} className="small pull-left">-</button>
             </div>

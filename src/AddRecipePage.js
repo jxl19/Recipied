@@ -1,26 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitRecipe, removeState } from './reducer';
+import { submitRecipe, removeState, uploadImage } from './reducer';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
 import AddIngredient from './AddIngredient';
 import AddStep from './AddStep';
+import ImageUpload from './ImageUpload';
 import './AddRecipePage.css'
 
-// add the new props into the fields
-// dishName, ingredients, calories, steps, image
-// each '+' is now pushed into the state, all we do now is dispatch it when with the post req when we submit form - mapstatetoprops or reducer side
+//how do we grab data from steps,ingredients without it needing to be dispactched from the original component -- we can make it on change?
 class AddRecipePage extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         const recipeName = this.recipeName.value;
-        const ingredient = this.refs.ingredient;
         const calories = this.calories.value;
-        // const steps = this.steps.value;
-        console.log(ingredient);
-        console.log(calories);
-        // this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps));
-        // this.props.dispatch(testSubmit(data));
+        const ingredient = this.props.ingredientsList;
+        const steps = this.props.stepsList;
+        const id = this.props.id
+        console.log('submitting');
+        this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, id));
     }
     render() {
         if (this.props.added) {
@@ -35,17 +33,18 @@ class AddRecipePage extends React.Component {
         // dishName, ingredients, calories, steps, image
         // a plus button next to ingredients to make a new input field
         console.log(this.props.added);
+        var token = localStorage.getItem('token');
+        console.log(token);
         return (
             <div>
                 <DashBoard />
                 <form className="js-search-formm col-md-12" onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
                         <input type="text" name="recipeName" className="recipe-form col-md-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
-                        {/* <input type="text" name="ingredient" className="recipe-form col-md-6" placeholder="Enter Ingredient" ref={(input) => this.ingredient = input} />  */}
                         <AddIngredient />
                         <input type="text" name="calories" className="recipe-form col-md-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
-                        {/* <input type="text" name="steps" className="recipe-form col-md-6" placeholder="Enter Steps" ref={(input) => this.steps = input} /> */}
-                        {/* <AddStep /> */}
+                        <AddStep />
+                        <ImageUpload />
                         <button className="btn-success recipe-form search col-md-6">
                             Add Recipe
                         </button>
@@ -57,7 +56,12 @@ class AddRecipePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    added: state.added
+    added: state.added,
+    ingredientsList: state.ingredientsList,
+    stepsList: state.stepsList,
+    file: state.file,
+    id : state.uuid,
+    token: state.token
 })
 
 export default connect(mapStateToProps)(AddRecipePage);

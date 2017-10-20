@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {searchRecipe, updateRecipe} from './reducer';
 import DashBoard from './DashBoard';
-import './UpdatePage.css'
+import './UpdatePage.css';
 //need to make on click focus on the element
+//if we make it on click we can keep it as a form and just resend the data over as an update -- meaning we just load up the update page similar to the addnew page and we send whatevr inputs are in the field back over to the server
+//we should probably change the data from the addrecipe page to reflect whatever is in the form... 
 
 class UpdatePage extends React.Component {
     componentDidMount() {
@@ -19,6 +21,9 @@ class UpdatePage extends React.Component {
         let recipes = undefined;
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
+                let ingredients = recipe.ingredients.map(ingredient => {
+                    return <div className='col-xs-12'>{ingredient}</div>
+                })
                 return (
                     <div className = 'card col-xs-11' key={i}>
                     <section className='card-block'>
@@ -28,7 +33,7 @@ class UpdatePage extends React.Component {
                     </section>
                     <section className='card-block'>
                         <h1 className='card-header head'>ingredients</h1>
-                        <h3>{recipe.ingredients}</h3>
+                        <h3>{ingredients}</h3>
                     </section>
                     <section className='card-block'>
                         <h2 className='card-header head'>{recipe.steps}</h2>

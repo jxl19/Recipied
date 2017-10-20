@@ -26,7 +26,6 @@
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    margin-top: -5px;
 }
 
 .search{
@@ -44,4 +43,19 @@
     border: 1px solid black;
     border-radius: 4px;
     margin-left: 5%;
+}
+
+.btn{
+    border-bottom: 0px !important; 
+}
+
+.card-text{
+    margin-bottom: 7px;
+}
+.logo{
+    background-image: url("tomato.png");
+    background-repeat:no-repeat;
+    height: 200px;
+    margin-left: 37%;
+    overflow-x: hidden;
 }

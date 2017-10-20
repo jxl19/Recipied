@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {uploadImage} from './reducer';
+import {uploadImage, addFiles, addImg} from './reducer';
 import './ImageUpload.css';
 
 // https://codepen.io/hartzis/pen/VvNGZP
@@ -23,11 +23,15 @@ class ImageUpload extends React.Component {
       let reader = new FileReader();
       let file = e.target.files[0];
   
+      //something to check for blob?? on loadend to prevent the error
+      // laggy in reducer?
       reader.onloadend = () => {
         this.setState({
           file: file,
           imagePreviewUrl: reader.result
         });
+        this.props.dispatch(addFiles(this.state.file));
+        // console.log(this.state.file)
       }
   
       reader.readAsDataURL(file)
@@ -43,7 +47,7 @@ class ImageUpload extends React.Component {
       }
       
       return (
-        <div className="previewComponent">
+        <div className="previewComponent image-form col-md-6">
           <form onSubmit={(e)=>this.handleSubmit(e)}>
             <input className="fileInput" 
               type="file" 
@@ -60,4 +64,10 @@ class ImageUpload extends React.Component {
     }
   }
 
-export default connect()(ImageUpload);
+
+const mapStateToProps = (state) => ({
+  file: state.file,
+  imagePreviewUrl: state.imagePreviewUrl
+})
+
+export default connect(mapStateToProps)(ImageUpload);

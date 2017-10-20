@@ -16,7 +16,12 @@ const initialState = {
     userData: [],
     delRecipe: false,
     clicked: false,
-    ingredientsList: []
+    ingredientsList: [],
+    stepsList: [],
+    file: '',
+    imagePreviewUrl: '',
+    uuid: '',
+    token: ''
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -24,15 +29,6 @@ export const sendRecipe = (recipeName) => ({
     type: SEND_RECIPE,
     recipeName
 })
-
-export const ADD_RECIPE = 'ADD_RECIPE';
-export const addRecipe = (recipeName, ingredient, calories, steps) => ({
-    type: ADD_RECIPE,
-    recipeName,
-    ingredient,
-    calories,
-    steps
-});
 
 export const ADD_FINISHED = 'ADD_FINISHED';
 export const addFinished = (data) => ({
@@ -95,22 +91,34 @@ export const dbClicked = (data) => ({
 export const ADD_RLIST = 'ADD_RLIST';
 export const addRList = (recipe) => ({
     type: ADD_RLIST,
-    payload:recipe
+    payload: recipe
 });
 
+export const ADD_STEP_LIST = 'ADD_STEP_LIST';
+export const addStepList = (step) => ({
+    type: ADD_STEP_LIST,
+    payload: step
+});
+
+export const ADD_FILE = 'ADD_FILE';
+export const addFiles = (files) => ({
+    type: ADD_FILE,
+    payload: files
+})
+
+export const ADD_IMG = 'ADD_IMG';
+export const addImg = (img) => ({
+    type: ADD_IMG,
+    payload: img
+})
+
+export const SAVE_ID = 'SAVE_ID';
+export const saveId = (id) => ({
+    type: SAVE_ID,
+    payload: id
+})
+
 export const recipeReducer = (state = initialState, action) => {
-    console.log(action);
-    if (action.type === ADD_RECIPE) {
-        console.log(action.recipeName);
-        console.log(action.ingredient);
-        state = Object.assign({}, state, {
-            recipeName: action.recipeName,
-            ingredient: action.ingredient,
-            calories: action.calories,
-            steps: action.steps
-        });
-        return state;
-    }
     if (action.type === REMOVE_STATE) {
         state = Object.assign({}, state, {
             added: false
@@ -148,7 +156,8 @@ export const recipeReducer = (state = initialState, action) => {
     if (action.type === LOGIN_FINISHED) {
         console.log(action.payload)
         state = Object.assign({}, initialState, {
-            isLoggedIn: true
+            isLoggedIn: true,
+            token: action.payload
         })
         return state;
     }
@@ -195,6 +204,33 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
+    if(action.type === ADD_STEP_LIST) {
+        console.log(state.stepsList);
+        state = Object.assign({}, state, {
+            stepsList: state.stepsList.concat(action.payload)
+        })
+        return state;
+    }
+    if(action.type === ADD_FILE) {
+        console.log(action.payload);
+        state = Object.assign({}, state, {
+            file: action.payload
+        })
+        return state;
+    }
+    if(action.type === ADD_IMG) {
+        console.log(action.payload);
+        state = Object.assign({}, state, {
+            imagePreviewUrl: action.payload
+        })
+        return state;
+    }
+    if(action.type === SAVE_ID) {
+        console.log(action.payload);
+        state = Object.assign({}, state, {
+            uuid: action.payload
+        })
+    }
     return state;
 };
 var token;
@@ -207,17 +243,20 @@ export const login = (data) => (dispatch) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)      //username, password
-    }).then(res => {
+    })
+    .then(res => {
         //json info in here from server
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         res.json().then((data) => {
-            console.log(data);
+            console.log(data.user);
             console.log(data.authToken);
             token = data.authToken;
+            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('id', data.user);
             if (token) {
-                dispatch(loginFinished(true));
+                dispatch(loginFinished(token));
             }
         })
     })
@@ -238,15 +277,18 @@ export const deleteRecipe = (id) => (dispatch) => {
         .catch(err => console.log(`${err}`))
 }
 
-export const getUserName = () => (dispatch) => {
-    fetch(`${API_BASE_URL}/recipes/user`,
+export const getUserName = (userid) => (dispatch) => {
+    console.log(userid);
+    fetch(`${API_BASE_URL}/recipes/user/${userid}`,
         {
             method: 'GET',
             header: {
-                'Content-Type': 'application/json'
+                'content-type': 'application/json',
+                'accept': 'application/json'
             }
         })
         .then(res => {
+            console.log(res);
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
@@ -259,13 +301,9 @@ export const getUserName = () => (dispatch) => {
         .catch(err => console.log(`${err}`))
 }
 
-export const testSubmit = (data) => (dispatch) => {
-    console.log('ATTRIBUTES', data);
-    
-}
-
-export const submitRecipe = (recipeName, ingredient, calories, steps) => (dispatch) => {
-    console.log("ATTRIBUTES ", recipeName, ingredient, calories, steps);
+export const submitRecipe = (recipeName, ingredient, calories, steps, id) => (dispatch) => {
+    // console.log("ATTRIBUTES ", recipeName, ingredient, calories, steps, img.name);
+    console.log(id);
     fetch(`${API_BASE_URL}/recipes`,
         {
             method: 'POST',
@@ -277,7 +315,8 @@ export const submitRecipe = (recipeName, ingredient, calories, steps) => (dispat
                 dishName: recipeName,
                 ingredients: ingredient,
                 calories: calories,
-                steps: steps
+                steps: steps,
+                image: id
             }),
         })
         .then(res => {
@@ -285,10 +324,6 @@ export const submitRecipe = (recipeName, ingredient, calories, steps) => (dispat
                 return Promise.reject(res.statusText);
             }
             return res.json();
-        })
-        .then(res => {
-            console.log({ recipeName, ingredient, calories, steps });
-            dispatch(addRecipe(recipeName, ingredient, calories, steps));
         })
         .then(() => {
             dispatch(addFinished(true));
@@ -317,8 +352,7 @@ export const getReciped = (recipeName) => (dispatch) => {
         })
         .catch(err => console.log(`error getting recipes ${err}`))
 }
-//remember to create the server side code for this get.
-//i should dispatch getid somewhere else first so i can render the page then update the page with the data from the api
+
 export const searchRecipe = (id) => (dispatch) => {
     console.log("recipe: ", id);
     fetch(`${API_BASE_URL}/recipes/id/${id}`,
@@ -373,6 +407,22 @@ export const uploadImage = (img)  => (dispatch) => {
         body: data
     })
     .then(res => {
+        return res.json();
+    })
+    .then(data => {
+        console.log(data.imageid);
+        dispatch(saveId(data.imageid))
+    })
+    .catch(err => console.log(`${err}`));
+}
+//logout to remove sessionstorage
+export const logOut = () => (dispatch) => {
+    fetch(`http://localhost:8080/api/users/logout`,
+    {
+        method: 'GET',
+    })
+    .then(res => {
+        sessionStorage.clear();
         console.log(res);
     })
     .catch(err => console.log(`${err}`));

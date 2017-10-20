@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import LogIn from './login';
 import './login.css';
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
 
 class LoginPage extends React.Component {
     render() {
         if (this.props.isLoggedIn) {
-            return <Redirect to='/homepage' />;
+            history.push("/home");
+            return <Redirect to='/home' />;
         }
         return (
             <div className="landing-page">
