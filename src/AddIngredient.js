@@ -26,11 +26,9 @@ class AddIngredient extends React.Component {
       const { name, ingredients } = this.state;
       alert(`Incorporated: ${name} with ${ingredients.length} ingredients`);
     }
-    //can we put handleadd with onchange together
-    //or a text box?
-    //or a text box that handles multiple inputs -- this seems to be the option
     //lets use a text box https://stackoverflow.com/questions/6262472/multiple-lines-of-input-in-input-type-text
     //https://stackoverflow.com/questions/6262472/multiple-lines-of-input-in-input-type-text
+    //we can just grab input from textbox and split the string up by numbers that we will create onenter
     handleAddIngredient = () => {
       console.log(this.ingredients.value);
       this.setState({ ingredients: this.state.ingredients.concat([{ name: '' }]) });
