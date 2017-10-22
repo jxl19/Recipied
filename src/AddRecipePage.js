@@ -9,20 +9,19 @@ import ImageUpload from './ImageUpload';
 import './AddRecipePage.css'
 
 //how do we grab data from steps,ingredients without it needing to be dispactched from the original component -- we can make it on change?
+//if id(imageid) is undefined throw error saying please upload photo first
 class AddRecipePage extends React.Component {
     handleClick = (event) => {
         event.preventDefault();
-        // const recipeName = this.recipeName.value;
-        // const calories = this.calories.value;
-        // const ingredient = this.props.ingredientsList;
-        // const steps = this.props.stepsList;
-        // const id = this.props.id
-        // console.log('submitting');
-        // this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, id));
+        var userid = sessionStorage.getItem('id');
+        const recipeName = this.recipeName.value;
+        const calories = this.calories.value;
+        const uuid = this.props.id
+        console.log('submitting');
         const steps = this.stepBox.value;
-        const ingredients = this.ingredientBox.value;
-        console.log({"steps" : steps, "ingrediens": ingredients});
-
+        const ingredient = this.ingredientBox.value;
+        console.log({"steps" : steps, "ingrediens": ingredient});
+        this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, uuid, userid));
     }
     handleKeyPress = (event) => {
         //make it a condition for it to also equal the area selected
@@ -57,13 +56,13 @@ class AddRecipePage extends React.Component {
                 <form className="js-search-formm col-md-12">
                     <div className="form-group">
                         <input type="text" name="recipeName" className="recipe-form col-md-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
-                        <input className='ingredientInput recipe-form col-md-6' onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
-                        <textarea className='ingredientBox recipe-form col-md-6' rows="12" ref={(input) => this.ingredientBox = input}></textarea>
+                        <input className='ingredientInput recipe-form col-md-6' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
+                        <textarea className='ingredientBox recipe-form col-md-6' ref={(input) => this.ingredientBox = input}></textarea>
                         {/* <AddIngredient /> */}
                         <input type="text" name="calories" className="recipe-form col-md-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
                         {/* <AddStep /> */}
-                        <input className='stepInput recipe-form col-md-6' onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
-                        <textarea className='stepBox recipe-form col-md-6' rows="12" ref={(input) => this.stepBox = input}></textarea>
+                        <input className='stepInput recipe-form col-md-6' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
+                        <textarea className='stepBox recipe-form col-md-6' ref={(input) => this.stepBox = input}></textarea>
                         <ImageUpload />
                         <button type ="button" className="btn-success recipe-form search col-md-6" onClick ={e => this.handleClick(e)}>
                             Add Recipe

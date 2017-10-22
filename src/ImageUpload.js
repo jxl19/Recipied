@@ -4,6 +4,7 @@ import {uploadImage, addFiles, addImg} from './reducer';
 import './ImageUpload.css';
 
 // https://codepen.io/hartzis/pen/VvNGZP
+// dispatch action saying uploaded
 class ImageUpload extends React.Component {
     constructor(props) {
       super(props);
@@ -12,6 +13,7 @@ class ImageUpload extends React.Component {
   
     handleSubmit(e) {
       e.preventDefault();
+      //remove the other photo?
       // TODO: do something with -> this.state.file
       console.log('handle uploading-', this.state.file);
       this.props.dispatch(uploadImage(this.state.file));

@@ -261,8 +261,8 @@ export const login = (data) => (dispatch) => {
         })
     })
 }
-
 export const deleteRecipe = (id) => (dispatch) => {
+    var userid = sessionStorage.getItem('id');
     fetch(`${API_BASE_URL}/recipes/${id}`,
         {
             method: 'DELETE',
@@ -272,14 +272,14 @@ export const deleteRecipe = (id) => (dispatch) => {
         })
         .then(res => {
            dispatch(recipeDeleted());
-           dispatch(getUserName());
+           dispatch(getUserName(userid));
         })
         .catch(err => console.log(`${err}`))
 }
 
-export const getUserName = (userid) => (dispatch) => {
-    console.log(userid);
-    fetch(`${API_BASE_URL}/recipes/user/${userid}`,
+export const getUserName = (user_id) => (dispatch) => {
+    console.log(user_id);
+    fetch(`${API_BASE_URL}/recipes/user/${user_id}`,
         {
             method: 'GET',
             header: {
@@ -301,9 +301,9 @@ export const getUserName = (userid) => (dispatch) => {
         .catch(err => console.log(`${err}`))
 }
 
-export const submitRecipe = (recipeName, ingredient, calories, steps, id) => (dispatch) => {
+export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, userid) => (dispatch) => {
     // console.log("ATTRIBUTES ", recipeName, ingredient, calories, steps, img.name);
-    console.log(id);
+    console.log(userid);
     fetch(`${API_BASE_URL}/recipes`,
         {
             method: 'POST',
@@ -316,7 +316,8 @@ export const submitRecipe = (recipeName, ingredient, calories, steps, id) => (di
                 ingredients: ingredient,
                 calories: calories,
                 steps: steps,
-                image: id
+                image: uuid,
+                userid: userid 
             }),
         })
         .then(res => {
@@ -375,18 +376,31 @@ export const searchRecipe = (id) => (dispatch) => {
         .catch(err => console.log(`error getting recipes ${err}`))
 }
 //-----IN PROGRESS-------
-export const updateRecipe = (id) => (dispatch) => {
-    console.log("recipe: ", id);
-    fetch(`${API_BASE_URL}/recipes/id/${id}`,
+export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uuid) => (dispatch) => {
+    console.log("recipe: ", recipeId);
+    fetch(`${API_BASE_URL}/recipes/${recipeId}`,
         {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                _id: recipeId,
+                dishName: dishName,
+                ingredients: ingredient,
+                calories: calories,
+                steps: step,
+                image: uuid,
+            }),
         })
         .then(res => {
-            console.log(res);
-            // dispatch(updateComplete());
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(() => {
+            dispatch(addFinished(true));
         })
         .catch(err => console.log(`${err}`));
 }

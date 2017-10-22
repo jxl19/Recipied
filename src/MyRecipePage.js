@@ -6,7 +6,7 @@ import DashBoard from './DashBoard';
 import './MyRecipePage.css';
 import createHistory from 'history/createBrowserHistory'
 
-const history = createHistory()
+const history = createHistory();
 class MyRecipePage extends React.Component {
     componentDidMount() {
         var userid = sessionStorage.getItem('id');

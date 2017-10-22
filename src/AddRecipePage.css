@@ -16,3 +16,7 @@
 .btn-success:hover{
     background-color: rgba(148, 158, 95, 0.8);
 }
+
+.stepBox, .ingredientBox{
+    height:150px;
+}
