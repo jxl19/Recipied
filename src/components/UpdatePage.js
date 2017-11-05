@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchRecipe, updateRecipe, updateData, removeState } from './reducer';
+import { searchRecipe, updateRecipe, updateData } from '../reducers/reducer';
+import {removeState} from '../actions/action';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../config';
 import ImageUpload from './ImageUpload';
 import './UpdatePage.css';
-//need to make on click focus on the element
-//if we make it on click we can keep it as a form and just resend the data over as an update -- meaning we just load up the update page similar to the addnew page and we send whatevr inputs are in the field back over to the server
-//we should probably change the data from the addrecipe page to reflect whatever is in the form... 
 
 class UpdatePage extends React.Component {
     constructor() {
@@ -63,7 +61,7 @@ class UpdatePage extends React.Component {
         let recipeId = recipe._id
         this.props.dispatch(updateRecipe(ingredient, step, calories, dishName, recipeId, uuid))
     }
-
+    //ingredient, step, calories, dishName, id, uuid
     render() {
         if (this.props.added) {
             this.props.dispatch(removeState());

@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {dbClicked, loadTo, logOut} from './reducer';
+import { logOut } from '../reducers/reducer';
+import {dbClicked, loadTo} from '../actions/action';
 import createHistory from 'history/createBrowserHistory'
-
+import './DashBoard.css';
 const history = createHistory()
 
 class DashBoard extends React.Component {
@@ -13,25 +14,24 @@ class DashBoard extends React.Component {
         this.props.dispatch(dbClicked(true));
         this.props.dispatch(loadTo(e.target.id));
     }
-    logout(e){
+    logout(e) {
         e.preventDefault();
         console.log('asd');
         this.props.dispatch(dbClicked(true));
         this.props.dispatch(logOut());
     }
     render() {
-        console.log(this.props.clicked);
         if (this.props.clicked) {
             console.log(this.props.redirectTo)
             this.props.dispatch(dbClicked(false));
             history.push('/' + this.props.redirectTo);
-            return <Redirect to= {"/" + this.props.redirectTo} />;
+            return <Redirect to={"/" + this.props.redirectTo} />;
         }
         return (
             <nav className="dashboard-nav">
                 <div onClick={(e) => this.handleClick(e)}>
-                <h4 className="placeholder col-xs-2 text-center recipe-page" id="home">
-                    APPNAME
+                    <h4 className="col-xs-2 text-center recipe-page" id="home">
+                        APPNAME
                 </h4>
                 </div>
                 <div onClick={(e) => this.handleClick(e)}>
@@ -45,11 +45,6 @@ class DashBoard extends React.Component {
                 <div onClick={e => this.handleClick(e)}>
                     <h4 className="recipe-page col-xs-2 text-center" id="addrecipes">
                         Add Recipe
-                </h4>
-                </div>
-                <div onClick={e => this.handleClick(e)}>
-                    <h4 className="recipe-page col-xs-2 text-center" id="placeholder">
-                        placeholder
                 </h4>
                 </div>
                 <div onClick={e => this.logout(e)}>

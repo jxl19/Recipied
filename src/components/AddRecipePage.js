@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitRecipe, removeState, uploadImage } from './reducer';
+import { submitRecipe, uploadImage } from '../reducers/reducer';
+import {removeState} from '../actions/action';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
-import AddIngredient from './AddIngredient';
-import AddStep from './AddStep';
 import ImageUpload from './ImageUpload';
 import './AddRecipePage.css'
 
@@ -58,9 +57,7 @@ class AddRecipePage extends React.Component {
                         <input type="text" name="recipeName" className="recipe-form col-md-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
                         <input className='ingredientInput recipe-form col-md-6' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
                         <textarea className='ingredientBox recipe-form col-md-6' ref={(input) => this.ingredientBox = input}></textarea>
-                        {/* <AddIngredient /> */}
                         <input type="text" name="calories" className="recipe-form col-md-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
-                        {/* <AddStep /> */}
                         <input className='stepInput recipe-form col-md-6' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
                         <textarea className='stepBox recipe-form col-md-6' ref={(input) => this.stepBox = input}></textarea>
                         <ImageUpload />

@@ -59,3 +59,11 @@
     margin-left: 37%;
     overflow-x: hidden;
 }
+
+.gotorecipe:hover{
+    text-decoration: underline;
+}
+.centerdiv{
+    margin: 0 auto;
+    text-align: center;
+}

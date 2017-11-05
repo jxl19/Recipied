@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login } from '../reducer';
+import { login } from '../reducers/reducer';
 import { Redirect, withRouter } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
@@ -18,10 +18,12 @@ class LogIn extends React.Component {
             this.setState({ loginSuccess: true })
         }
     }
+    componentDidUpdate(props) {
+        console.log('asd');
+    }
     handleSubmit(e) {
         e.preventDefault();
         console.log(`handlesubmit--- ${this.username.value} ${this.password.value}`);
-        console.log(this.props.isLoggedIn);
         // if state.logged = false, return props login , else redirect
         return this.props.login({
             username: this.username.value,
@@ -29,8 +31,10 @@ class LogIn extends React.Component {
         })
     }
     render() {
+        console.log(this.props.isLoggedIn);
         if (this.props.isLoggedIn) {
             history.push('/home');
+            console.log('hereiam');
             return <Redirect to='/home' />;
         }
         return (

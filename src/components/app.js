@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
-import {goToLogin} from './reducer';
+import {goToLogin} from '../reducers/reducer';
 import RecipePage from './recipePage';
 import HomePage from './HomePage';
-import LoginPage from './login/LoginPage';
+import LoginPage from '../login/LoginPage';
 import SearchRecipePage from './SearchRecipePage';
 import AddRecipePage from './AddRecipePage';
 import MyRecipePage from './MyRecipePage';
@@ -12,6 +12,7 @@ import UpdatePage from './UpdatePage';
 import ImageUpload from './ImageUpload';
 import RoutePrivate from './RoutePrivate';
 import createHistory from 'history/createBrowserHistory'
+
 
 const history = createHistory()
 class App extends React.Component {

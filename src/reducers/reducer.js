@@ -1,5 +1,5 @@
-import { API_BASE_URL } from './config'
-
+import { API_BASE_URL } from '../config';
+import * as actions from '../actions/action';
 const initialState = {
     recipeName: '',
     ingredient: '',
@@ -119,41 +119,41 @@ export const saveId = (id) => ({
 })
 
 export const recipeReducer = (state = initialState, action) => {
-    if (action.type === REMOVE_STATE) {
+    if (action.type === actions.REMOVE_STATE) {
         state = Object.assign({}, state, {
             added: false
         })
         return state;
     }
-    if (action.type === ADD_FINISHED) {
+    if (action.type === actions.ADD_FINISHED) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             added: action.payload
         })
         return state;
     }
-    if (action.type === GET_RECIPE) {
+    if (action.type === actions.GET_RECIPE) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             recipes: action.payload
         });
         return state;
     }
-    if (action.type === SEND_RECIPE) {
+    if (action.type === actions.SEND_RECIPE) {
         console.log(action.recipeName);
         state = Object.assign({}, state, {
             recipeName: action.recipeName
         });
         return state;
     }
-    if (action.type === LOAD_TO) {
+    if (action.type === actions.LOAD_TO) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             loadTo: action.payload
         });
         return state;
     }
-    if (action.type === LOGIN_FINISHED) {
+    if (action.type === actions.LOGIN_FINISHED) {
         console.log(action.payload)
         state = Object.assign({}, initialState, {
             isLoggedIn: true,
@@ -161,7 +161,7 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
-    if (action.type === GET_ID) {
+    if (action.type === actions.GET_ID) {
         console.log(action.payload);
         state = Object.assign({}, initialState, {
             id: action.payload,
@@ -170,7 +170,7 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
 
-    if (action.type === RECIPE_DATA) {
+    if (action.type === actions.RECIPE_DATA) {
         console.log(action.payload);
         state = Object.assign({}, initialState, {
             recipeData: action.payload
@@ -178,54 +178,54 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
 
-    if (action.type === GET_USER) {
+    if (action.type === actions.GET_USER) {
         console.log(action.payload);
         state = Object.assign({}, initialState, {
             userData: action.payload
         })
         return state;
     }
-    if (action.type === RECIPE_DELETED) {
+    if (action.type === actions.RECIPE_DELETED) {
         state = Object.assign({}, initialState, {
             delRecipe: true
         })
         return state;
     }
-    if (action.type === DB_CLICKED) {
+    if (action.type === actions.DB_CLICKED) {
         state = Object.assign({}, initialState, {
             clicked: action.payload
         })
         return state;
     }
-    if (action.type === ADD_RLIST) {
+    if (action.type === actions.ADD_RLIST) {
         console.log(state.ingredientsList);
         state = Object.assign({}, state, {
             ingredientsList: state.ingredientsList.concat(action.payload)
         })
         return state;
     }
-    if(action.type === ADD_STEP_LIST) {
+    if(action.type === actions.ADD_STEP_LIST) {
         console.log(state.stepsList);
         state = Object.assign({}, state, {
             stepsList: state.stepsList.concat(action.payload)
         })
         return state;
     }
-    if(action.type === ADD_FILE) {
+    if(action.type === actions.ADD_FILE) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             file: action.payload
         })
         return state;
     }
-    if(action.type === ADD_IMG) {
+    if(action.type === actions.ADD_IMG) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             imagePreviewUrl: action.payload
         })
         return state;
     }
-    if(action.type === SAVE_ID) {
+    if(action.type === actions.SAVE_ID) {
         console.log(action.payload);
         state = Object.assign({}, state, {
             uuid: action.payload

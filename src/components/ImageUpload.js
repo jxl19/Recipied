@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {uploadImage, addFiles, addImg} from './reducer';
+import {uploadImage, addImg} from '../reducers/reducer';
+import {addFiles} from '../actions/action';
 import './ImageUpload.css';
 
 // https://codepen.io/hartzis/pen/VvNGZP

@@ -38,7 +38,9 @@ h4{
     padding-left:10px;
     padding-right:10px;
 }
-
+.glyphicon {
+    top: 30%;
+}
 /* .recipe_name{
     margin-left: 15px;
 } */
