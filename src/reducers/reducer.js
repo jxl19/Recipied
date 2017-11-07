@@ -10,6 +10,7 @@ const initialState = {
     isLoggedIn: false,
     id: '',
     idSet: false,
+    renderToPage: false,
     recipeData: '',
     added: false,
     username: '',
@@ -57,6 +58,12 @@ export const loginFinished = (cred) => ({
 export const GET_ID = 'GET_ID';
 export const getId = (id) => ({
     type: GET_ID,
+    payload: id
+})
+
+export const RENDER_ID = 'RENDER_ID';
+export const renderID = (id) => ({
+    type: RENDER_ID,
     payload: id
 })
 
@@ -163,7 +170,14 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
-
+    if (action.type === actions.RENDER_ID) {
+        console.log(action.payload);
+        state = Object.assign({}, initialState, {
+            id:action.payload,
+            renderToPage: true
+        })
+        return state;
+    }
     if (action.type === actions.RECIPE_DATA) {
         state = Object.assign({}, initialState, {
             recipeData: action.payload
@@ -280,6 +294,28 @@ export const getUserName = (user_id) => (dispatch) => {
             dispatch(getUser(res));
         })
         .catch(err => console.log(`${err}`))
+}
+//will also need to make a sign in page 
+export const createUser = (data) => (dispatch) => {
+    fetch('http://localhost:8080/api/users/signup',
+    {
+        method: 'POST',
+        headers: {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(data)  
+    })
+    .then(res =>{
+        if(!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        return res.json();
+    })
+    .then(res => {
+        //dispatch action to login
+        dispatch(login())
+    })
 }
 
 export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, userid) => (dispatch) => {

@@ -16,8 +16,8 @@ class LoginPage extends React.Component {
         return (
             <div className="landing-page">
                 <section className="about-landing">
-                    <div className="header-about">
-                        <h3> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut est suscipit, consectetur tellus in, rhoncus ligula. Cras euismod in tortor sed molestie. Nam pretium tellus ac dui finibus, sed faucibus arcu consectetur. </h3>
+                    <div className="header-about text-center">
+                        <h3> Reciped allows for you to upload your own recipes or search for recipes that have been uploaded to this site. <span> Sign-up now</span> or log in below! </h3>
                     </div>
                 </section>
                 <LogIn />

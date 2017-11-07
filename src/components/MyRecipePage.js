@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getUserName, deleteRecipe } from '../reducers/reducer';
-import {getId} from '../actions/action';
+import {getId, renderID} from '../actions/action';
 import { Redirect } from 'react-router-dom';
 import DashBoard from './DashBoard';
 import { Table, Column, Cell } from 'fixed-data-table';
@@ -31,13 +31,16 @@ class MyRecipePage extends React.Component {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         console.log(this.state);
       }
-
     handleClick(e, id) {
         e.preventDefault();
         console.log(id);
         this.props.dispatch(getId(id));
     }
-
+    onClick(e, id) {
+        e.preventDefault();
+        console.log(id);
+        this.props.dispatch(renderID(id));
+    }
     handleDelete(e, id) {
         e.preventDefault();
         console.log(id);
@@ -49,6 +52,11 @@ class MyRecipePage extends React.Component {
             history.push("/myrecipes/" + this.props.id);
             return <Redirect to={"/myrecipes/" + this.props.id} />
         }
+        if (this.props.renderPage) {
+            console.log(this.props.renderToPage);
+            history.push("/recipepage/" + this.props.id)
+            return <Redirect to={"/recipepage/" + this.props.id} />
+        }
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.45;
         let thisHeight = this.state.height/2;
@@ -57,6 +65,7 @@ class MyRecipePage extends React.Component {
         let user = undefined;
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
            //trashbin, edit icon next to name
+           //onclick for the recipe name make it redirect to its own page
             user = <Table className="center"
             rowHeight={50}
             headerHeight={50}
@@ -66,7 +75,7 @@ class MyRecipePage extends React.Component {
             <Column
                 header={<Cell>Dish Name</Cell>}
                 cell={props => (
-                    <Cell {...props}>
+                    <Cell {...props} onClick={e=>this.onClick(e, this.props.userData[props.rowIndex]._id)}>
                       {this.props.userData[props.rowIndex].dishName}
                     </Cell>
                   )}
@@ -119,6 +128,7 @@ class MyRecipePage extends React.Component {
 const mapStateToProps = (state) => ({
     userData: state.userData,
     idSet: state.idSet,
+    renderPage: state.renderToPage,
     id: state.id,
     recipeDeleted: state.delRecipe
 })

@@ -34,6 +34,12 @@ export const getId = (id) => ({
     payload: id
 })
 
+export const RENDER_ID = 'RENDER_ID';
+export const renderID = (id) => ({
+    type: RENDER_ID,
+    payload: id
+})
+
 export const RECIPE_DATA = 'RECIPE_DATA';
 export const recipeData = (data) => ({
     type: RECIPE_DATA,

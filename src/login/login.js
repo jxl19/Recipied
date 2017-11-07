@@ -41,6 +41,7 @@ class LogIn extends React.Component {
                                     <p className="login_button">
                                         <button className="signup-login-button" >Log In</button>
                                     </p>
+                                    <p className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password </p>
                                 </div>
                             </form>
                         </div>
