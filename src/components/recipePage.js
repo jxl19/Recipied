@@ -29,25 +29,21 @@ class RecipePage extends React.Component {
       
       updateWindowDimensions() {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
-        console.log(this.state);
       }
     onSubmit(e) {
         e.preventDefault();
         var userid = sessionStorage.getItem('id');
-        console.log(userid);
         const recipe = this.recipe.value;
         this.props.dispatch(getReciped(recipe));
         this.props.dispatch(getUserName(userid));
     }
     handleClick(e, id) {
         e.preventDefault();
-        console.log(id);
         this.props.dispatch(getId(id));
     }
     render() {
         //determine if mobile, maybe check if width is less than a certain number?
         if (this.props.idSet) {
-            console.log(this.props.idSet);
             history.push('/recipepage/' + this.props.id);
             return <Redirect to={"/recipepage/" + this.props.id} />
         }
@@ -67,9 +63,6 @@ class RecipePage extends React.Component {
         let columnWidth = this.state.width*0.49;
         let tableHeight = (this.props.existingRecipes.length + 1) *50.5;
         if (this.props.existingRecipes.length > 0) {
-            console.log(this.props.existingRecipes);
-            console.log("EXISTING RECIPE CHECK", this.props.existingRecipes);
-
             recipes =
                 <Table className="centerdiv col-xs-12"
                     rowHeight={50}

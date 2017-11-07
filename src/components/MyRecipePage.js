@@ -7,7 +7,7 @@ import DashBoard from './DashBoard';
 import { Table, Column, Cell } from 'fixed-data-table';
 import './MyRecipePage.css';
 import createHistory from 'history/createBrowserHistory'
-//fix container size for width
+//have dishname link to its own page
 const history = createHistory();
 class MyRecipePage extends React.Component {
     constructor(props) {

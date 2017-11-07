@@ -22,10 +22,8 @@ class UpdatePage extends React.Component {
         console.log(this.props.match.params.id)
         this.props.dispatch(searchRecipe(this.props.match.params.id))
     }
-    //on blur send over to redux then from redux send back over to here then we can dispatch action to send everything over later
     handleChange(e) {
         e.preventDefault();
-        console.log("area to change: " + e.target.id)
         if(e.target.id == "ingredient") {
             this.setState({ ingredient: e.target.value});
         }
@@ -38,18 +36,9 @@ class UpdatePage extends React.Component {
         else if(e.target.id =="calories") {
             this.setState({ calories: e.target.value});
         }
-        console.log("value of target: " + e.target.value);
-        console.log("value in state: " + this.state.ingredient);
-
     }
     handleUpdate(e, recipe) {
         e.preventDefault();
-        console.log("ingredient:" + this.ingredient.value);
-        console.log("step:" + this.step.value);
-        console.log("calories: " + this.calories.value);
-        console.log("dishName: " + this.dishName.value);
-        console.log("uuid: " + uuid);
-        console.log(recipe._id);
         let uuid = recipe.image;
         if(this.props.uuid) {
             uuid = this.props.uuid;
@@ -65,7 +54,6 @@ class UpdatePage extends React.Component {
     render() {
         if (this.props.added) {
             this.props.dispatch(removeState());
-            console.log(this.props.added);
             var result = window.confirm("success");
             if(result === true) {
             return (

@@ -126,35 +126,30 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.ADD_FINISHED) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             added: action.payload
         })
         return state;
     }
     if (action.type === actions.GET_RECIPE) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             recipes: action.payload
         });
         return state;
     }
     if (action.type === actions.SEND_RECIPE) {
-        console.log(action.recipeName);
         state = Object.assign({}, state, {
             recipeName: action.recipeName
         });
         return state;
     }
     if (action.type === actions.LOAD_TO) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             loadTo: action.payload
         });
         return state;
     }
     if (action.type === actions.LOGIN_FINISHED) {
-        console.log(action.payload)
         state = Object.assign({}, initialState, {
             isLoggedIn: true,
             token: action.payload
@@ -162,7 +157,6 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.GET_ID) {
-        console.log(action.payload);
         state = Object.assign({}, initialState, {
             id: action.payload,
             idSet: true
@@ -171,7 +165,6 @@ export const recipeReducer = (state = initialState, action) => {
     }
 
     if (action.type === actions.RECIPE_DATA) {
-        console.log(action.payload);
         state = Object.assign({}, initialState, {
             recipeData: action.payload
         })
@@ -179,7 +172,6 @@ export const recipeReducer = (state = initialState, action) => {
     }
 
     if (action.type === actions.GET_USER) {
-        console.log(action.payload);
         state = Object.assign({}, initialState, {
             userData: action.payload
         })
@@ -198,35 +190,30 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.ADD_RLIST) {
-        console.log(state.ingredientsList);
         state = Object.assign({}, state, {
             ingredientsList: state.ingredientsList.concat(action.payload)
         })
         return state;
     }
     if(action.type === actions.ADD_STEP_LIST) {
-        console.log(state.stepsList);
         state = Object.assign({}, state, {
             stepsList: state.stepsList.concat(action.payload)
         })
         return state;
     }
     if(action.type === actions.ADD_FILE) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             file: action.payload
         })
         return state;
     }
     if(action.type === actions.ADD_IMG) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             imagePreviewUrl: action.payload
         })
         return state;
     }
     if(action.type === actions.SAVE_ID) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             uuid: action.payload
         })
@@ -235,7 +222,6 @@ export const recipeReducer = (state = initialState, action) => {
 };
 var token;
 export const login = (data) => (dispatch) => {
-    console.log("login credentials", data);
     fetch('http://localhost:8080/api/users/login', {
         method: 'post',
         headers: {
@@ -250,8 +236,6 @@ export const login = (data) => (dispatch) => {
             return Promise.reject(res.statusText);
         }
         res.json().then((data) => {
-            console.log(data.user);
-            console.log(data.authToken);
             token = data.authToken;
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('id', data.user);
@@ -278,7 +262,6 @@ export const deleteRecipe = (id) => (dispatch) => {
 }
 
 export const getUserName = (user_id) => (dispatch) => {
-    console.log(user_id);
     fetch(`${API_BASE_URL}/recipes/user/${user_id}`,
         {
             method: 'GET',
@@ -288,22 +271,18 @@ export const getUserName = (user_id) => (dispatch) => {
             }
         })
         .then(res => {
-            console.log(res);
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
             return res.json();
         })
         .then(res => {
-            console.log(res);
             dispatch(getUser(res));
         })
         .catch(err => console.log(`${err}`))
 }
 
 export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, userid) => (dispatch) => {
-    // console.log("ATTRIBUTES ", recipeName, ingredient, calories, steps, img.name);
-    console.log(userid);
     fetch(`${API_BASE_URL}/recipes`,
         {
             method: 'POST',
@@ -333,7 +312,6 @@ export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, user
 }
 
 export const getReciped = (recipeName) => (dispatch) => {
-    console.log("ATTRIBUTES ", recipeName);
     fetch(`${API_BASE_URL}/recipes/get/${recipeName}`,
         {
             method: 'GET',
@@ -348,14 +326,12 @@ export const getReciped = (recipeName) => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log(res);
             dispatch(getRecipe(res));
         })
         .catch(err => console.log(`error getting recipes ${err}`))
 }
 
 export const searchRecipe = (id) => (dispatch) => {
-    console.log("recipe: ", id);
     fetch(`${API_BASE_URL}/recipes/id/${id}`,
         {
             method: 'GET',
@@ -370,14 +346,12 @@ export const searchRecipe = (id) => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log(res);
             dispatch(recipeData(res));
         })
         .catch(err => console.log(`error getting recipes ${err}`))
 }
 //-----IN PROGRESS-------
 export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uuid) => (dispatch) => {
-    console.log("recipe: ", recipeId);
     fetch(`${API_BASE_URL}/recipes/${recipeId}`,
         {
             method: 'PUT',
@@ -406,12 +380,9 @@ export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uui
 }
 
 export const uploadImage = (img)  => (dispatch) => {
-    console.log(img);
     let data = new FormData();
     data.append('file', img);
     data.append('name', img.name);
-
-    console.log("imgfile", img.name);
     fetch(`${API_BASE_URL}/upload`,
     {
         method: 'POST',
@@ -424,7 +395,6 @@ export const uploadImage = (img)  => (dispatch) => {
         return res.json();
     })
     .then(data => {
-        console.log(data.imageid);
         dispatch(saveId(data.imageid))
     })
     .catch(err => console.log(`${err}`));
@@ -437,7 +407,6 @@ export const logOut = () => (dispatch) => {
     })
     .then(res => {
         sessionStorage.clear();
-        console.log(res);
     })
     .catch(err => console.log(`${err}`));
 }

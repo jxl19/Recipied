@@ -12,26 +12,18 @@ const history = createHistory()
 class LogIn extends React.Component {
 
     componentWillReceiveProps(newProps) {
-        console.log('Component WILL RECIEVE PROPS!')
-        console.log(newProps.isLoggedIn);
         if (newProps.isLoggedIn === true) {
             this.setState({ loginSuccess: true })
         }
     }
-    componentDidUpdate(props) {
-        console.log('asd');
-    }
     handleSubmit(e) {
         e.preventDefault();
-        console.log(`handlesubmit--- ${this.username.value} ${this.password.value}`);
-        // if state.logged = false, return props login , else redirect
         return this.props.login({
             username: this.username.value,
             password: this.password.value
         })
     }
     render() {
-        console.log(this.props.isLoggedIn);
         if (this.props.isLoggedIn) {
             history.push('/home');
             console.log('hereiam');

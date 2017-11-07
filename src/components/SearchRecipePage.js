@@ -6,17 +6,13 @@ import { API_BASE_URL } from '../config';
 import './SearchRecipePage.css'
 
 class SearchRecipePage extends React.Component {
-    //create reduicer to set the idset state to false
     componentWillMount(props) {
-        console.log(this.props.match.params.id);
         this.props.dispatch(searchRecipe(this.props.match.params.id));
     }
     render() {
-        console.log(this.props.recipeData);
         let recipes = undefined;
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
-                console.log(recipe.ingredients);
                 let test = `${API_BASE_URL}/file/${recipe.image}`;
                 let image = <img className='imagefile col-xs-6'src={test} />
                 let ingredients = recipe.ingredients.map(ingredient => {
