@@ -236,7 +236,7 @@ export const recipeReducer = (state = initialState, action) => {
 };
 var token;
 export const login = (data) => (dispatch) => {
-    fetch('http://localhost:8080/api/users/login', {
+    fetch(`${API_BASE_URL}/users/login`, {
         method: 'post',
         headers: {
             'Accept': 'application/json',
@@ -262,7 +262,7 @@ export const login = (data) => (dispatch) => {
 
 //will also need to make a sign in page 
 export const createUser = (data) => (dispatch) => {
-    fetch('http://localhost:8080/api/users/signup',
+    fetch(`${API_BASE_URL}/users/signup`,
     {
         method: 'POST',
         headers: {
@@ -385,7 +385,7 @@ export const searchRecipe = (id) => (dispatch) => {
         })
         .catch(err => console.log(`error getting recipes ${err}`))
 }
-//-----IN PROGRESS-------
+
 export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uuid) => (dispatch) => {
     fetch(`${API_BASE_URL}/recipes/${recipeId}`,
         {
