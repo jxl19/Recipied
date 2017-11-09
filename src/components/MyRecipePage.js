@@ -17,7 +17,6 @@ class MyRecipePage extends React.Component {
       }
       componentDidMount() {
         var userid = sessionStorage.getItem('id');
-        console.log(userid);
         this.props.dispatch(getUserName(userid));
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
@@ -29,43 +28,34 @@ class MyRecipePage extends React.Component {
       
       updateWindowDimensions() {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
-        console.log(this.state);
       }
     handleClick(e, id) {
         e.preventDefault();
-        console.log(id);
         this.props.dispatch(getId(id));
     }
     onClick(e, id) {
         e.preventDefault();
-        console.log(id);
         this.props.dispatch(renderID(id));
     }
     handleDelete(e, id) {
         e.preventDefault();
-        console.log(id);
         this.props.dispatch(deleteRecipe(id));
     }
     render() {
         if (this.props.idSet) {
-            console.log(this.props.idSet);
             history.push("/myrecipes/" + this.props.id);
             return <Redirect to={"/myrecipes/" + this.props.id} />
         }
         if (this.props.renderPage) {
-            console.log(this.props.renderToPage);
             history.push("/recipepage/" + this.props.id)
             return <Redirect to={"/recipepage/" + this.props.id} />
         }
         let tableWidth = this.state.width*0.98;
-        let columnWidth = this.state.width*0.45;
-        let thisHeight = this.state.height/2;
-        let tableHeight = (this.props.userData.length + 1) *50.5;
-        console.log(this.props.userData);
+        let columnWidth = this.state.width*0.40;
+        let tableHeight = (this.props.userData.length + 1) *50.29999;
+        let buttonWidth = this.state.width*0.0899;
         let user = undefined;
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
-           //trashbin, edit icon next to name
-           //onclick for the recipe name make it redirect to its own page
             user = <Table className="center"
             rowHeight={50}
             headerHeight={50}
@@ -75,7 +65,7 @@ class MyRecipePage extends React.Component {
             <Column
                 header={<Cell>Dish Name</Cell>}
                 cell={props => (
-                    <Cell {...props} onClick={e=>this.onClick(e, this.props.userData[props.rowIndex]._id)}>
+                    <Cell className="dish"{...props} onClick={e=>this.onClick(e, this.props.userData[props.rowIndex]._id)}>
                       {this.props.userData[props.rowIndex].dishName}
                     </Cell>
                   )}
@@ -95,14 +85,14 @@ class MyRecipePage extends React.Component {
                     <Cell className="glyphicon glyphicon-edit"{...props} onClick={e=>this.handleClick(e, this.props.userData[props.rowIndex]._id)}>
                     </Cell>
                   )}
-                width={67}
+                width={buttonWidth}
             />
             <Column
                 cell={props => (
                     <Cell className="glyphicon glyphicon-remove-circle"{...props} onClick={e=>this.handleDelete(e, this.props.userData[props.rowIndex]._id)}>
                     </Cell>
                   )}
-                width={67}
+                width={buttonWidth}
             />
             </Table>
         }
@@ -117,7 +107,7 @@ class MyRecipePage extends React.Component {
         return (
             <div>
                 < DashBoard />
-                <div className="centerdiv col-xs-12">
+                <div className="centerdiv col-xs-12 myrecipeboard">
                     {user}
                 </div>
             </div>

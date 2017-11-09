@@ -23,5 +23,29 @@
 
 .test1{
     width:98%;
-    margin-left:-18%
+    margin-left:-19%
+}
+
+.dishupdate{
+    width:50%;
+}
+
+.calupdate{
+    width:50%;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .test1{
+        margin-left:0%;
+    }
+    .dishupdate{
+        width:0%;
+        display:block;
+    }
+    .calupdate{
+        width:0%;
+    }
+    .imagefile{
+        margin-left: -19px;
+    }
 }

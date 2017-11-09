@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchRecipe, updateRecipe, updateData } from '../reducers/reducer';
+import { searchRecipe, updateRecipe } from '../reducers/reducer';
 import {removeState} from '../actions/action';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
@@ -19,21 +19,20 @@ class UpdatePage extends React.Component {
         };
       }
     componentDidMount() {
-        console.log(this.props.match.params.id)
         this.props.dispatch(searchRecipe(this.props.match.params.id))
     }
     handleChange(e) {
         e.preventDefault();
-        if(e.target.id == "ingredient") {
+        if(e.target.id === "ingredient") {
             this.setState({ ingredient: e.target.value});
         }
-        else if(e.target.id == "step") {
+        else if(e.target.id === "step") {
             this.setState({ step : e.target.value});
         }
-        else if(e.target.id == "dishName") {
+        else if(e.target.id === "dishName") {
             this.setState({ ingredient: e.target.value});
         }
-        else if(e.target.id =="calories") {
+        else if(e.target.id ==="calories") {
             this.setState({ calories: e.target.value});
         }
     }
@@ -50,7 +49,7 @@ class UpdatePage extends React.Component {
         let recipeId = recipe._id
         this.props.dispatch(updateRecipe(ingredient, step, calories, dishName, recipeId, uuid))
     }
-    //ingredient, step, calories, dishName, id, uuid
+
     render() {
         if (this.props.added) {
             this.props.dispatch(removeState());
@@ -76,10 +75,10 @@ class UpdatePage extends React.Component {
                         <div className='card col-xs-11'>
                             <section className='card-block'>
                                 <h2 className='card-header head'>Recipe Update</h2>
-                                <label className='col-xs-6'>Dishname
+                                <label className='dishupdate'>Dishname
                                 <input defaultValue={recipe.dishName} id="dishName" onChange={this.handleChange.bind(this)} ref={(input) => this.dishName = input}></input>
                                 </label>
-                                <label className='col-xs-6'>Calories
+                                <label className='calupdate'>Calories
                                 <input defaultValue={recipe.calories} id="calories" onChange={this.handleChange.bind(this)} ref={(input) => this.calories = input}></input>
                                 </label>
                             </section>

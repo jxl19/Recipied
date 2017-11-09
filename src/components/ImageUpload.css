@@ -13,6 +13,14 @@
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-left:21%;
+    margin-left:0%;
+    width:95%;
+}
+
+/* media query for how big the form will be */
+@media (min-width: 640px) {
+    .image-form{
+        margin-left:21%;
+        width: 50%
+    }
 }

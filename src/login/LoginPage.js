@@ -8,6 +8,13 @@ import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 
 class LoginPage extends React.Component {
+    handleClick(e) {
+        //dispatch action to show clicked and render it over
+        e.preventDefault();
+        console.log('test')
+        history.push("/signup");
+        return <Redirect to="/signup" />;
+    }
     render() {
         if (this.props.isLoggedIn) {
             history.push("/home");
@@ -17,7 +24,7 @@ class LoginPage extends React.Component {
             <div className="landing-page">
                 <section className="about-landing">
                     <div className="header-about text-center">
-                        <h3> Reciped allows for you to upload your own recipes or search for recipes that have been uploaded to this site. <span> Sign-up now</span> or log in below! </h3>
+                        <h3> Reciped allows for you to upload your own recipes or search for recipes that have been uploaded to this site.  </h3>
                     </div>
                 </section>
                 <LogIn />

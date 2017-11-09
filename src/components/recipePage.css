@@ -7,9 +7,16 @@
     color: #555;
     background-color: #fff;
     background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-left:21%;
+    border: 1px solid #ccc;;
+    margin-left:0%;
+    width:95%;
+}
+
+.submit-form{
+    display: block;
+    width:50%;
+    height: 34px;
+    margin-left: 20%;
 }
 
 .js-search-form{
@@ -36,7 +43,6 @@
     text-align: center;
     background-color: #eee;
     border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 .card {
@@ -52,18 +58,42 @@
 .card-text{
     margin-bottom: 7px;
 }
+
 .logo{
     background-image: url("tomato.png");
     background-repeat:no-repeat;
     height: 200px;
-    margin-left: 37%;
+    margin-left: 20%;
     overflow-x: hidden;
 }
 
 .gotorecipe:hover{
     text-decoration: underline;
 }
+
 .centerdiv{
     margin: 0 auto;
     text-align: center;
+    overflow: hidden;
+    padding-left: 15px;
+}
+
+@media (min-width: 640px) {
+    .recipe-form{
+        margin-left:21%;
+    }
+    .logo{
+        margin-left:37%
+    }
+
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .logo{
+        margin-left: 0%;
+        height:200px;
+    }
+    .centerdiv{
+        padding-left:4px;
+    }
 }

@@ -42,29 +42,20 @@ class RecipePage extends React.Component {
         this.props.dispatch(getId(id));
     }
     render() {
-        //determine if mobile, maybe check if width is less than a certain number?
         if (this.props.idSet) {
             history.push('/recipepage/' + this.props.id);
             return <Redirect to={"/recipepage/" + this.props.id} />
         }
-        //we can use istouch to check if mobile
-        var isTouch = ('ontouchstart' in window);
-        console.log(isTouch);
-        var clientWidth = function () {  return Math.max(window.innerWidth, document.documentElement.clientWidth);};
-        var clientHeight = function () {  return Math.max(window.innerHeight, document.documentElement.clientHeight);};
-        console.log(clientHeight());
-        console.log(clientWidth())
-        console.log(this.state);
-        var { dataList } = this.props.existingRecipes;
+        // var clientWidth = function () {  return Math.max(window.innerWidth, document.documentElement.clientWidth);};
+        // var clientHeight = function () {  return Math.max(window.innerHeight, document.documentElement.clientHeight);};
         var userid = sessionStorage.getItem('id');
-        console.log(userid);
         let recipes = undefined;
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.49;
         let tableHeight = (this.props.existingRecipes.length + 1) *50.5;
         if (this.props.existingRecipes.length > 0) {
             recipes =
-                <Table className="centerdiv col-xs-12"
+                <Table className="centerdiv"
                     rowHeight={50}
                     headerHeight={50}
                     rowsCount={this.props.existingRecipes.length}
@@ -105,7 +96,7 @@ class RecipePage extends React.Component {
                     <div className="container">
                         <form className="js-search-form col-md-12" onSubmit={e => this.onSubmit(e)}>
                             <div className="form-group">
-                                <input type="text" name="getRecipe" className="recipe-form col-xs-6" placeholder="search for recipe" ref={(input) => this.recipe = input} />
+                                <input type="text" name="getRecipe" className="submit-form col-xs-6" placeholder="search for recipe" ref={(input) => this.recipe = input} />
                                 <div className="search col-xs-1">
                                     <i className="glyphicon glyphicon-search"></i>
                                 </div>
@@ -113,7 +104,7 @@ class RecipePage extends React.Component {
                         </form>
                     </div>
                 </div>
-                <div className="centerdiv col-xs-12">
+                <div className="centerdiv">
                     {recipes}
                 </div>
             </div>

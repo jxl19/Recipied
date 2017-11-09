@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitRecipe, uploadImage } from '../reducers/reducer';
+import { submitRecipe } from '../reducers/reducer';
 import {removeState} from '../actions/action';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
@@ -20,7 +20,6 @@ class AddRecipePage extends React.Component {
     }
     handleKeyPress = (event) => {
         if(event.key == 'Enter' && this.ingredientInput.value !== ''){
-          console.log(this.ingredientInput.value)
           this.ingredientBox.value = this.ingredientBox.value +'-'+ this.ingredientInput.value + "\n";
           this.ingredientInput.value = '';
         }
@@ -38,21 +37,20 @@ class AddRecipePage extends React.Component {
                 <Redirect to={"/home"} /> 
             )}
         }
-        // dishName, ingredients, calories, steps, image
         var token = localStorage.getItem('token');
         return (
             <div>
                 <DashBoard />
-                <form className="js-search-formm col-md-12">
+                <form className="js-search-formm">
                     <div className="form-group">
-                        <input type="text" name="recipeName" className="recipe-form col-md-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
-                        <input className='ingredientInput recipe-form col-md-6' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
-                        <textarea className='ingredientBox recipe-form col-md-6' ref={(input) => this.ingredientBox = input}></textarea>
-                        <input type="text" name="calories" className="recipe-form col-md-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
-                        <input className='stepInput recipe-form col-md-6' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
-                        <textarea className='stepBox recipe-form col-md-6' ref={(input) => this.stepBox = input}></textarea>
+                        <input type="text" name="recipeName" className="recipe-form col-xs-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
+                        <input className='ingredientInput recipe-form col-xs-6' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
+                        <textarea className='ingredientBox recipe-form col-xs-6' ref={(input) => this.ingredientBox = input}></textarea>
+                        <input type="text" name="calories" className="recipe-form col-xs-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
+                        <input className='stepInput recipe-form col-xs-6' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
+                        <textarea className='stepBox recipe-form col-xs-6' ref={(input) => this.stepBox = input}></textarea>
                         <ImageUpload />
-                        <button type ="button" className="btn-success recipe-form search col-md-6" onClick ={e => this.handleClick(e)}>
+                        <button type ="button" className="btn-success recipe-form search col-xs-6" onClick ={e => this.handleClick(e)}>
                             Add Recipe
                         </button>
                     </div>

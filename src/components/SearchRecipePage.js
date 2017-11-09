@@ -13,8 +13,8 @@ class SearchRecipePage extends React.Component {
         let recipes = undefined;
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
-                let test = `${API_BASE_URL}/file/${recipe.image}`;
-                let image = <img className='imagefile col-xs-6'src={test} />
+                let imglocation = `${API_BASE_URL}/file/${recipe.image}`;
+                let image = <img className='imagefile col-xs-6'src={imglocation} />
                 let ingredients = recipe.ingredients.map(ingredient => {
                     return <div className='col-xs-6'>{ingredient}</div>
                 })

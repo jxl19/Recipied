@@ -39,3 +39,15 @@
 .input-login{
     border-radius: 5px;
 }
+
+.sign_up{
+    margin-top:10px;
+}
+.sign_up:hover{
+    text-decoration: underline;
+    color:white;
+}
+
+.demo {
+    font-weight: 900;
+}

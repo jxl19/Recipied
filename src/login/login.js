@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { login } from '../reducers/reducer';
+import {dbClicked} from '../actions/action';
 import { Redirect, withRouter } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
@@ -23,16 +24,25 @@ class LogIn extends React.Component {
             password: this.password.value
         })
     }
+    handleSignUp(e) {
+        e.preventDefault();
+        console.log('clicked');
+        return this.props.clicked(true);
+    }
     render() {
         if (this.props.isLoggedIn) {
             history.push('/home');
             console.log('hereiam');
             return <Redirect to='/home' />;
         }
+        if (this.props.click) {
+            this.props.clicked(false);
+            history.push('/signup');
+            return <Redirect to='/signup' />
+        }
         return (
             // center login inputs and button
-                <div className="col-md-12">
-                    <div className="log-in-container col-md-6">
+                    <div className="log-in-container">
                         <div className="center">
                             <form onSubmit={e => this.handleSubmit(e)} id="login-form">
                                 <div className="login">
@@ -41,11 +51,10 @@ class LogIn extends React.Component {
                                     <p className="login_button">
                                         <button className="signup-login-button" >Log In</button>
                                     </p>
-                                    <p className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password </p>
+                                    <div className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password <div className="sign_up" onClick={e=>this.handleSignUp(e)}>Sign up</div></div>
                                 </div>
                             </form>
                         </div>
-                    </div>
                     {/* <p className="header-login-button">
                         <button className="page-login-signup-button" onClick={this.props.gotoSignup}>Sign Up</button>
                     </p> */}
@@ -59,11 +68,15 @@ const mapDispatchToProps = (dispatch) => ({
         console.log("mapDispatchToProps logging out creds", attributes);
         dispatch(login(attributes));
     },
+    clicked: (bool) => {
+        dispatch(dbClicked(bool));
+    },
     gotoSignup: () => dispatch(push('/signup')),
     goToHomePage: () => dispatch(push('/homepage'))
 })
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.isLoggedIn,
+    click: state.clicked
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogIn));

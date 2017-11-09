@@ -259,6 +259,27 @@ export const login = (data) => (dispatch) => {
         })
     })
 }
+
+//will also need to make a sign in page 
+export const createUser = (data) => (dispatch) => {
+    fetch('http://localhost:8080/api/users/signup',
+    {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)  
+    })
+    .then(res =>{
+        if(!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        //dispatch action to login
+        dispatch(login(data))
+    })
+}
+
 export const deleteRecipe = (id) => (dispatch) => {
     var userid = sessionStorage.getItem('id');
     fetch(`${API_BASE_URL}/recipes/${id}`,
@@ -294,28 +315,6 @@ export const getUserName = (user_id) => (dispatch) => {
             dispatch(getUser(res));
         })
         .catch(err => console.log(`${err}`))
-}
-//will also need to make a sign in page 
-export const createUser = (data) => (dispatch) => {
-    fetch('http://localhost:8080/api/users/signup',
-    {
-        method: 'POST',
-        headers: {
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify(data)  
-    })
-    .then(res =>{
-        if(!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    })
-    .then(res => {
-        //dispatch action to login
-        dispatch(login())
-    })
 }
 
 export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, userid) => (dispatch) => {
