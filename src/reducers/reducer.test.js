@@ -44,6 +44,7 @@ describe('recipeReducer', () => {
             added: false,
             username: '',
             userData: [],
+            renderToPage: false,
             delRecipe: false,
             clicked: false,
             ingredientsList: [],
