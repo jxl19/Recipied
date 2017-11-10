@@ -1,6 +1,5 @@
 language: node_js
 node_js: node
-services: mongodb
 cache:
   directories:
     - node_modules
@@ -8,3 +7,14 @@ script:
   - npm test
 env:
   - CI=true
+
+before_deploy:
+  - npm install netlify-cli -g
+  - npm run build
+
+deploy:
+  provider: script
+  script: netlify deploy -s $965da1e2-3e53-44cb-9cc2-9a487f3eb512 -t $2f793f2b8ff496d8d0053be9c4ed9cf456a97c0fa1eb03b85a2a16bc53fb04a7 -p ./build
+  skip_cleanup: true
+  on:
+    branch: master
