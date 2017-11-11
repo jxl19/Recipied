@@ -173,7 +173,7 @@ export const recipeReducer = (state = initialState, action) => {
     if (action.type === actions.RENDER_ID) {
         console.log(action.payload);
         state = Object.assign({}, initialState, {
-            id:action.payload,
+            id: action.payload,
             renderToPage: true
         })
         return state;
@@ -209,25 +209,25 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
-    if(action.type === actions.ADD_STEP_LIST) {
+    if (action.type === actions.ADD_STEP_LIST) {
         state = Object.assign({}, state, {
             stepsList: state.stepsList.concat(action.payload)
         })
         return state;
     }
-    if(action.type === actions.ADD_FILE) {
+    if (action.type === actions.ADD_FILE) {
         state = Object.assign({}, state, {
             file: action.payload
         })
         return state;
     }
-    if(action.type === actions.ADD_IMG) {
+    if (action.type === actions.ADD_IMG) {
         state = Object.assign({}, state, {
             imagePreviewUrl: action.payload
         })
         return state;
     }
-    if(action.type === actions.SAVE_ID) {
+    if (action.type === actions.SAVE_ID) {
         state = Object.assign({}, state, {
             uuid: action.payload
         })
@@ -244,40 +244,45 @@ export const login = (data) => (dispatch) => {
         },
         body: JSON.stringify(data)      //username, password
     })
-    .then(res => {
-        //json info in here from server
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        res.json().then((data) => {
-            token = data.authToken;
-            sessionStorage.setItem('token', token);
-            sessionStorage.setItem('id', data.user);
-            if (token) {
-                dispatch(loginFinished(token));
+        .then(res => {
+            //json info in here from server
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
             }
+            res.json().then((data) => {
+                token = data.authToken;
+                sessionStorage.setItem('token', token);
+                sessionStorage.setItem('id', data.user);
+                if (token) {
+                    dispatch(loginFinished(token));
+                }
+            })
+                .then(res => {
+                    if (!token) {
+                        window.alert('Invalid username or password');
+                    }
+                })
         })
-    })
 }
 
 //will also need to make a sign in page 
 export const createUser = (data) => (dispatch) => {
     fetch(`${API_BASE_URL}/users/signup`,
-    {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)  
-    })
-    .then(res =>{
-        if(!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        //dispatch action to login
-        dispatch(login(data))
-    })
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            //dispatch action to login
+            dispatch(login(data))
+        })
 }
 
 export const deleteRecipe = (id) => (dispatch) => {
@@ -290,8 +295,8 @@ export const deleteRecipe = (id) => (dispatch) => {
             }
         })
         .then(res => {
-           dispatch(recipeDeleted());
-           dispatch(getUserName(userid));
+            dispatch(recipeDeleted());
+            dispatch(getUserName(userid));
         })
         .catch(err => console.log(`${err}`))
 }
@@ -331,7 +336,7 @@ export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, user
                 calories: calories,
                 steps: steps,
                 image: uuid,
-                userid: userid 
+                userid: userid
             }),
         })
         .then(res => {
@@ -414,34 +419,34 @@ export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uui
         .catch(err => console.log(`${err}`));
 }
 
-export const uploadImage = (img)  => (dispatch) => {
+export const uploadImage = (img) => (dispatch) => {
     let data = new FormData();
     data.append('file', img);
     data.append('name', img.name);
     fetch(`${API_BASE_URL}/upload`,
-    {
-        method: 'POST',
-        headers: {
-            'Accept' : 'application/json',
-        },
-        body: data
-    })
-    .then(res => {
-        return res.json();
-    })
-    .then(data => {
-        dispatch(saveId(data.imageid))
-    })
-    .catch(err => console.log(`${err}`));
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: data
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            dispatch(saveId(data.imageid))
+        })
+        .catch(err => console.log(`${err}`));
 }
 //logout to remove sessionstorage
 export const logOut = () => (dispatch) => {
     fetch(`http://localhost:8080/api/users/logout`,
-    {
-        method: 'GET',
-    })
-    .then(res => {
-        sessionStorage.clear();
-    })
-    .catch(err => console.log(`${err}`));
+        {
+            method: 'GET',
+        })
+        .then(res => {
+            sessionStorage.clear();
+        })
+        .catch(err => console.log(`${err}`));
 }

@@ -13,6 +13,7 @@ class ImageUpload extends React.Component {
     handleSubmit(e) {
       e.preventDefault();
       this.props.dispatch(uploadImage(this.state.file));
+      window.alert("uploaded");
     }
   
     handleImageChange(e) {
