@@ -441,7 +441,7 @@ export const uploadImage = (img) => (dispatch) => {
 }
 //logout to remove sessionstorage
 export const logOut = () => (dispatch) => {
-    fetch(`http://localhost:8080/api/users/logout`,
+    fetch(`${API_BASE_URL}/users/logout`,
         {
             method: 'GET',
         })
