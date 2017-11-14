@@ -11,7 +11,6 @@ class LoginPage extends React.Component {
     handleClick(e) {
         //dispatch action to show clicked and render it over
         e.preventDefault();
-        console.log('test')
         history.push("/signup");
         return <Redirect to="/signup" />;
     }

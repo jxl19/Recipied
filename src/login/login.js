@@ -26,13 +26,11 @@ class LogIn extends React.Component {
     }
     handleSignUp(e) {
         e.preventDefault();
-        console.log('clicked');
         return this.props.clicked(true);
     }
     render() {
         if (this.props.isLoggedIn) {
             history.push('/home');
-            console.log('hereiam');
             return <Redirect to='/home' />;
         }
         if (this.props.click) {
@@ -65,7 +63,6 @@ class LogIn extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     login: (attributes) => {
-        console.log("mapDispatchToProps logging out creds", attributes);
         dispatch(login(attributes));
     },
     clicked: (bool) => {
