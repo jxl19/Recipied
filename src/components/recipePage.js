@@ -32,8 +32,9 @@ class RecipePage extends React.Component {
       }
     onSubmit(e) {
         e.preventDefault();
+        console.log('hello');
         var userid = sessionStorage.getItem('id');
-        const recipe = this.recipe.value;
+        const recipe = this.recipe.value.toLowerCase();
         this.props.dispatch(getReciped(recipe));
         this.props.dispatch(getUserName(userid));
     }
