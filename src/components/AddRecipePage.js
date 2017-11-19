@@ -11,7 +11,8 @@ class AddRecipePage extends React.Component {
     handleClick = (event) => {
         event.preventDefault();
         var userid = sessionStorage.getItem('id');
-        const recipeName = this.recipeName.value;
+        const recipeName = this.recipeName.value.toLowerCase();
+        console.log(this.recipeName.value.toLowerCase());
         const calories = this.calories.value;
         const uuid = this.props.id
         const steps = this.stepBox.value;

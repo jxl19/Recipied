@@ -300,7 +300,7 @@ export const deleteRecipe = (id) => (dispatch) => {
         })
         .catch(err => console.log(`${err}`))
 }
-
+//gets recipes made by user
 export const getUserName = (user_id) => (dispatch) => {
     fetch(`${API_BASE_URL}/recipes/user/${user_id}`,
         {

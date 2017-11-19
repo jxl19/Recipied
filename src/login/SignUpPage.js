@@ -45,7 +45,7 @@ class SignUpPage extends React.Component {
                             <div className="login">
                                 <p><input type="text" ref={(input) => this.username = input} className="input-login" placeholder="User ID" size="35" required /></p>
                                 <p><input type="password" ref={(input) => this.password = input} className="input-login" placeholder="Password" size="35" required /></p>
-                                <p><input type="confirmPassword" ref={(input) => this.confirmPassword = input} className="input-login" placeholder="Confirm Password" size="35" required /></p>
+                                <p><input type="password" ref={(input) => this.confirmPassword = input} className="input-login" placeholder="Confirm Password" size="35" required /></p>
                                 <p className="login_button">
                                     <button className="signup-login-button" >Sign Up</button>
                                 </p>

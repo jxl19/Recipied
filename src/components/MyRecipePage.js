@@ -55,6 +55,7 @@ class MyRecipePage extends React.Component {
         let tableHeight = (this.props.userData.length + 1) *50.29999;
         let buttonWidth = this.state.width*0.0899;
         let user = undefined;
+        console.log(this.props.userData);
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
             user = <Table className="center"
             rowHeight={50}
@@ -65,7 +66,7 @@ class MyRecipePage extends React.Component {
             <Column
                 header={<Cell>Dish Name</Cell>}
                 cell={props => (
-                    <Cell className="dish"{...props} onClick={e=>this.onClick(e, this.props.userData[props.rowIndex]._id)}>
+                    <Cell className="dish"{...props} onClick={e=>this.onClick(e, this.props.userData[props.rowIndex].id)}>
                       {this.props.userData[props.rowIndex].dishName}
                     </Cell>
                   )}
@@ -82,14 +83,14 @@ class MyRecipePage extends React.Component {
             />
             <Column
                 cell={props => (
-                    <Cell className="glyphicon glyphicon-edit"{...props} onClick={e=>this.handleClick(e, this.props.userData[props.rowIndex]._id)}>
+                    <Cell className="glyphicon glyphicon-edit"{...props} onClick={e=>this.handleClick(e, this.props.userData[props.rowIndex].id)}>
                     </Cell>
                   )}
                 width={buttonWidth}
             />
             <Column
                 cell={props => (
-                    <Cell className="glyphicon glyphicon-remove-circle"{...props} onClick={e=>this.handleDelete(e, this.props.userData[props.rowIndex]._id)}>
+                    <Cell className="glyphicon glyphicon-remove-circle"{...props} onClick={e=>this.handleDelete(e, this.props.userData[props.rowIndex].id)}>
                     </Cell>
                   )}
                 width={buttonWidth}

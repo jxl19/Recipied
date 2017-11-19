@@ -27,22 +27,25 @@ class DashBoard extends React.Component {
         return (
             <nav className="dashboard-nav">
                 <div className="navWide ">
+                <div onClick={(e) => this.handleClick(e)}>
+                        <h4 className="recipe-page col-xs-2 logohome" id="home">Reciped</h4>
+                    </div>
                     <div onClick={(e) => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-3 text-center" id="home">Search Recipes</h4>
+                        <h4 className="recipe-page col-xs-2" id="home">Search Recipes</h4>
                     </div>
                     <div onClick={e => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-3 text-center" id="myrecipes">
+                        <h4 className="recipe-page col-xs-2" id="myrecipes">
                             My Recipes
                 </h4>
                     </div>
                     <div onClick={e => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-3 text-center" id="addrecipes">
+                        <h4 className="recipe-page col-xs-2" id="addrecipes">
                             Add Recipe
                 </h4>
                     </div>
                     <div onClick={e => this.logout(e)}>
-                        <h4 className="recipe-page col-xs-3 text-center" id="/">
-                            sign-out
+                        <h4 className="recipe-page col-xs-2" id="/">
+                            Sign-Out
                 </h4>
                     </div>
                 </div>
@@ -64,7 +67,7 @@ class DashBoard extends React.Component {
                 </div>
                 <div onClick={e => this.logout(e)}>
                     <h4 className="burgermenu"id="/">
-                        sign-out
+                        Sign-Out
             </h4>
                 </div>
 					</div>
