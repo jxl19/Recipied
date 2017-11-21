@@ -24,7 +24,6 @@ class SearchRecipePage extends React.Component {
                 return (
                     <div className='col-xs-12' key={i}>
                         <section className='upper-container col-xs-12'>
-                            <h3>this would hold name and picture</h3>
                             <h3 className='col-xs-6'>{recipe.dishName}</h3>
                             {image}
                             <div className='col-xs-12'>

@@ -22,7 +22,8 @@ const initialState = {
     file: '',
     imagePreviewUrl: '',
     uuid: '',
-    token: ''
+    token: '',
+    loading:false
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -123,6 +124,12 @@ export const SAVE_ID = 'SAVE_ID';
 export const saveId = (id) => ({
     type: SAVE_ID,
     payload: id
+})
+
+export const LOADING_BAR = 'LOADING';
+export const loadingBar = (data) => ({
+    type: LOADING_BAR,
+    payload: data
 })
 
 export const recipeReducer = (state = initialState, action) => {
@@ -232,10 +239,18 @@ export const recipeReducer = (state = initialState, action) => {
             uuid: action.payload
         })
     }
+    if (action.type === actions.LOADING_BAR) {
+        console.log(action.payload);
+        state = Object.assign({}, state, {
+            loading: action.payload
+        })
+    }
     return state;
 };
 var token;
+//dispatch an action that puts up a loading bar, then remove loading bar as soon as its over
 export const login = (data) => (dispatch) => {
+    dispatch(loadingBar(true));
     fetch(`${API_BASE_URL}/users/login`, {
         method: 'post',
         headers: {
@@ -255,11 +270,13 @@ export const login = (data) => (dispatch) => {
                 sessionStorage.setItem('id', data.user);
                 if (token) {
                     dispatch(loginFinished(token));
+                    dispatch(loadingBar(false));
                 }
             })
                 .then(res => {
                     if (!token) {
                         window.alert('Invalid username or password');
+                        dispatch(loadingBar(false));
                     }
                 })
         })

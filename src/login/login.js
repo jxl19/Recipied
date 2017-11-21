@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { login } from '../reducers/reducer';
-import {dbClicked} from '../actions/action';
+import { dbClicked } from '../actions/action';
 import { Redirect, withRouter } from 'react-router-dom';
+import Spinner from 'react-spinkit';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 //if theres token automatically redirect
@@ -15,6 +16,12 @@ class LogIn extends React.Component {
     componentWillReceiveProps(newProps) {
         if (newProps.isLoggedIn === true) {
             this.setState({ loginSuccess: true })
+        }
+    }
+    renderResults() {
+        if (this.props.loading) {
+            console.log('here');
+            return <Spinner spinnerName="circle" noFadeIn />;
         }
     }
     handleSubmit(e) {
@@ -40,23 +47,26 @@ class LogIn extends React.Component {
         }
         return (
             // center login inputs and button
-                    <div className="log-in-container">
-                        <div className="center">
-                            <form onSubmit={e => this.handleSubmit(e)} id="login-form">
-                                <div className="login">
-                                    <p><input type="text" ref={(input) => this.username = input} className="input-login" placeholder="User ID" size="35" required /></p>
-                                    <p><input type="password" ref={(input) => this.password = input} className="input-login" placeholder="Password" size="35" required /></p>
-                                    <p className="login_button">
-                                        <button className="signup-login-button" >Log In</button>
-                                    </p>
-                                    <div className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password <div className="sign_up" onClick={e=>this.handleSignUp(e)}>Sign up</div></div>
-                                </div>
-                            </form>
+            <div className="log-in-container">
+                <div className="center">
+                    <form onSubmit={e => this.handleSubmit(e)} id="login-form">
+                        <div className="login">
+                            <p><input type="text" ref={(input) => this.username = input} className="input-login" placeholder="User ID" size="35" required /></p>
+                            <p><input type="password" ref={(input) => this.password = input} className="input-login" placeholder="Password" size="35" required /></p>
+                            <p className="login_button">
+                                <button className="signup-login-button" >Log In</button>
+                            </p>
+                            <div className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password <div className="sign_up" onClick={e => this.handleSignUp(e)}>Sign up</div></div>
                         </div>
-                    {/* <p className="header-login-button">
+                    </form>
+                    <div>
+                        {this.renderResults()}
+                    </div>
+                </div>
+                {/* <p className="header-login-button">
                         <button className="page-login-signup-button" onClick={this.props.gotoSignup}>Sign Up</button>
                     </p> */}
-                </div>
+            </div>
         );
     }
 }
@@ -74,6 +84,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.isLoggedIn,
-    click: state.clicked
+    click: state.clicked,
+    loading: state.loading
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogIn));

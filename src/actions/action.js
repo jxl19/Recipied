@@ -97,3 +97,9 @@ export const saveId = (id) => ({
     type: SAVE_ID,
     payload: id
 })
+
+export const LOADING_BAR = 'LOADING';
+export const loadingBar = (data) => ({
+    type: LOADING_BAR,
+    payload: data
+})

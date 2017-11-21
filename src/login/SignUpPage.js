@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { createUser } from '../reducers/reducer';
 import { Redirect } from 'react-router-dom';
+import Spinner from 'react-spinkit';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 //if theres token automatically redirect
@@ -17,10 +18,16 @@ class SignUpPage extends React.Component {
             this.setState({ loginSuccess: true })
         }
     }
+    renderResults() {
+        if (this.props.loading) {
+            console.log('here');
+            return <Spinner spinnerName="circle" noFadeIn />;
+        }
+    }
     handleSubmit(e) {
         e.preventDefault();
         //function if confirm and pw same alert
-        if(this.password.value === this.confirmPassword.value) {
+        if (this.password.value === this.confirmPassword.value) {
             return this.props.createUser({
                 username: this.username.value,
                 password: this.password.value
@@ -51,6 +58,9 @@ class SignUpPage extends React.Component {
                                 </p>
                             </div>
                         </form>
+                        <div>
+                            {this.renderResults()}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,7 +79,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.isLoggedIn,
+    loading: state.loading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
