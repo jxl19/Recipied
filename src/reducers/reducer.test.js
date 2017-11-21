@@ -52,7 +52,8 @@ describe('recipeReducer', () => {
             file: '',
             imagePreviewUrl: '',
             uuid: '',
-            token: ''
+            token: '',
+            loading:false
         });
     });
     it('Should return the current state on an unknown action', () => {
