@@ -178,7 +178,6 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.RENDER_ID) {
-        console.log(action.payload);
         state = Object.assign({}, initialState, {
             id: action.payload,
             renderToPage: true
@@ -240,7 +239,6 @@ export const recipeReducer = (state = initialState, action) => {
         })
     }
     if (action.type === actions.LOADING_BAR) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             loading: action.payload
         })

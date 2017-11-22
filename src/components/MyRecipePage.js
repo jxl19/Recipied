@@ -7,7 +7,6 @@ import DashBoard from './DashBoard';
 import { Table, Column, Cell } from 'fixed-data-table';
 import './MyRecipePage.css';
 import createHistory from 'history/createBrowserHistory'
-//have dishname link to its own page
 const history = createHistory();
 class MyRecipePage extends React.Component {
     constructor(props) {
@@ -55,7 +54,6 @@ class MyRecipePage extends React.Component {
         let tableHeight = (this.props.userData.length + 1) *50.29999;
         let buttonWidth = this.state.width*0.0899;
         let user = undefined;
-        console.log(this.props.userData);
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
             user = <Table className="center"
             rowHeight={50}

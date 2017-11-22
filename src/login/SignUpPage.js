@@ -20,7 +20,6 @@ class SignUpPage extends React.Component {
     }
     renderResults() {
         if (this.props.loading) {
-            console.log('here');
             return <Spinner spinnerName="circle" noFadeIn />;
         }
     }
@@ -70,7 +69,6 @@ class SignUpPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     createUser: (attributes) => {
-        console.log("signing up ", attributes);
         dispatch(createUser(attributes));
     },
     gotoSignup: () => dispatch(push('/signup')),

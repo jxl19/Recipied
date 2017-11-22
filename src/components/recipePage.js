@@ -32,7 +32,6 @@ class RecipePage extends React.Component {
       }
     onSubmit(e) {
         e.preventDefault();
-        console.log('hello');
         var userid = sessionStorage.getItem('id');
         const recipe = this.recipe.value.toLowerCase();
         this.props.dispatch(getReciped(recipe));
@@ -65,7 +64,7 @@ class RecipePage extends React.Component {
                     <Column
                         header={<Cell>Dish Name</Cell>}
                         cell={props => (
-                            <Cell className="gotorecipe"{...props} onClick={e => this.handleClick(e, this.props.existingRecipes[props.rowIndex]._id)}>
+                            <Cell className="gotorecipe"{...props} onClick={e => this.handleClick(e, this.props.existingRecipes[props.rowIndex].id)}>
                                 {this.props.existingRecipes[props.rowIndex].dishName}
                             </Cell>
                         )}
@@ -82,12 +81,6 @@ class RecipePage extends React.Component {
                     />
                 </Table>
         }
-        //condition to print out of nothing
-        // else if () {
-        //     console.log('here')
-        //     console.log(this.props.existingRecipes);
-        //     recipes = <li>No Recipes here!</li>
-        // }
         return (
             <div>
                 <DashBoard />

@@ -7,9 +7,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import Spinner from 'react-spinkit';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
-//if theres token automatically redirect
 import createHistory from 'history/createBrowserHistory'
-//when we login we should grab the jwt token from the server and save it in the state.. so we need to make server send over the response for that token so we can save it
 const history = createHistory()
 class LogIn extends React.Component {
 
@@ -20,7 +18,6 @@ class LogIn extends React.Component {
     }
     renderResults() {
         if (this.props.loading) {
-            console.log('here');
             return <Spinner spinnerName="circle" noFadeIn />;
         }
     }
@@ -46,7 +43,6 @@ class LogIn extends React.Component {
             return <Redirect to='/signup' />
         }
         return (
-            // center login inputs and button
             <div className="log-in-container">
                 <div className="center">
                     <form onSubmit={e => this.handleSubmit(e)} id="login-form">
@@ -63,9 +59,6 @@ class LogIn extends React.Component {
                         {this.renderResults()}
                     </div>
                 </div>
-                {/* <p className="header-login-button">
-                        <button className="page-login-signup-button" onClick={this.props.gotoSignup}>Sign Up</button>
-                    </p> */}
             </div>
         );
     }
