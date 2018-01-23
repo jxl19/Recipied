@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import DashBoard from './DashBoard';
 import './HomePage.css'
 import './recipePage.css';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class HomePage extends React.Component {
     render(){

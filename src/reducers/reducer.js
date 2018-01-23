@@ -23,7 +23,9 @@ const initialState = {
     imagePreviewUrl: '',
     uuid: '',
     token: '',
-    loading:false
+    loading: false,
+    link: '',
+    linkCreated: false
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -132,6 +134,12 @@ export const loadingBar = (data) => ({
     payload: data
 })
 
+export const SAVE_BITLY_LINK = 'SAVE_BITLY_LINK';
+export const saveBitlyLink = (data) => ({
+    type: SAVE_BITLY_LINK,
+    payload: data
+})
+
 export const recipeReducer = (state = initialState, action) => {
     if (action.type === actions.REMOVE_STATE) {
         state = Object.assign({}, state, {
@@ -146,6 +154,7 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.GET_RECIPE) {
+        console.log(action.payload);
         state = Object.assign({}, state, {
             recipes: action.payload
         });
@@ -242,6 +251,14 @@ export const recipeReducer = (state = initialState, action) => {
         state = Object.assign({}, state, {
             loading: action.payload
         })
+    }
+    if(action.type === actions.SAVE_BITLY_LINK) {
+        console.log(action.payload);
+        state = Object.assign({}, state, {
+            link: action.payload,
+            linkCreated: true
+        })
+        return state;
     }
     return state;
 };
@@ -386,6 +403,26 @@ export const getReciped = (recipeName) => (dispatch) => {
         .catch(err => console.log(`error getting recipes ${err}`))
 }
 
+export const getAllRecipes = () => (dispatch) => {
+    fetch(`${API_BASE_URL}/recipes/all`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(res => {
+            console.log(res);
+            dispatch(getRecipe(res));
+        })
+        .catch(err => console.log(`error getting recipes ${err}`))
+}
 export const searchRecipe = (id) => (dispatch) => {
     fetch(`${API_BASE_URL}/recipes/id/${id}`,
         {
@@ -462,6 +499,19 @@ export const logOut = () => (dispatch) => {
         })
         .then(res => {
             sessionStorage.clear();
+        })
+        .catch(err => console.log(`${err}`));
+}
+
+export const createBitlyLink = (link) => (dispatch) => {
+    fetch(`https://api-ssl.bitly.com/v3/shorten?access_token=7b1d19e650e64483cd5e26946f576fb2ec4b5197&longUrl=http%3A%2F%2F${link}%2F`,
+        { method: 'GET' })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log(data.data.url)
+            dispatch(saveBitlyLink(data.data.url))
         })
         .catch(err => console.log(`${err}`));
 }

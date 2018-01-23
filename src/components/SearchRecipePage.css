@@ -1,6 +1,12 @@
 .upper-container {
     border: 1px solid black;
 }
+h3:hover {
+    position: relative;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 .middle-container{ 
     border: 1px solid black;

@@ -103,3 +103,9 @@ export const loadingBar = (data) => ({
     type: LOADING_BAR,
     payload: data
 })
+
+export const SAVE_BITLY_LINK = 'SAVE_BITLY_LINK';
+export const saveBitlyLink = (data) => ({
+    type: SAVE_BITLY_LINK,
+    payload: data
+})

@@ -5,7 +5,6 @@ import { login } from '../reducers/reducer';
 import { dbClicked } from '../actions/action';
 import { Redirect, withRouter } from 'react-router-dom';
 import Spinner from 'react-spinkit';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory()

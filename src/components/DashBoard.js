@@ -28,7 +28,7 @@ class DashBoard extends React.Component {
             <nav className="dashboard-nav">
                 <div className="navWide ">
                 <div onClick={(e) => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-2 logohome" id="home">Reciped</h4>
+                        <h4 className="recipe-page col-xs-2 logohome" id="home">Recipied</h4>
                     </div>
                     <div onClick={(e) => this.handleClick(e)}>
                         <h4 className="recipe-page col-xs-2" id="home">Search Recipes</h4>

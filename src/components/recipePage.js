@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getReciped, getUserName } from '../reducers/reducer';
+import { getReciped, getUserName, getAllRecipes } from '../reducers/reducer';
 import {getId} from '../actions/action';
 import './recipePage.css';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Table, Column, Cell } from 'fixed-data-table';
 import DashBoard from './DashBoard';
 import { Redirect } from 'react-router-dom';
@@ -19,6 +18,8 @@ class RecipePage extends React.Component {
       }
       
       componentDidMount() {
+          console.log('didmoint');
+        this.props.dispatch(getAllRecipes());
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
       }
@@ -49,6 +50,8 @@ class RecipePage extends React.Component {
         // var clientWidth = function () {  return Math.max(window.innerWidth, document.documentElement.clientWidth);};
         // var clientHeight = function () {  return Math.max(window.innerHeight, document.documentElement.clientHeight);};
         var userid = sessionStorage.getItem('id');
+        console.log(userid);
+        console.log(this.props.existingRecipes);
         let recipes = undefined;
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.49;

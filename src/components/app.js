@@ -26,7 +26,7 @@ class App extends React.Component {
                         <RoutePrivate exact path="/myrecipes" component={MyRecipePage} />
                         <RoutePrivate exact path ="/addrecipes" component ={AddRecipePage}/>
                         <RoutePrivate exact path="/home" component={RecipePage}/>
-                        <RoutePrivate exact path="/recipepage/:id" component={SearchRecipePage}/>
+                        <Route exact path="/recipepage/:id" component={SearchRecipePage}/>
                         <RoutePrivate exact path="/myrecipes/:id" component={UpdatePage}/>
                         <RoutePrivate exact path ="/imageupload" component={ImageUpload}/>
                         <Route exact path="/" component={LoginPage} />
