@@ -504,12 +504,14 @@ export const logOut = () => (dispatch) => {
 }
 
 export const createBitlyLink = (link) => (dispatch) => {
-    fetch(`https://api-ssl.bitly.com/v3/shorten?access_token=7b1d19e650e64483cd5e26946f576fb2ec4b5197&longUrl=http%3A%2F%2F${link}%2F`,
+    fetch(`https://api-ssl.bitly.com/v3/shorten?access_token=7b1d19e650e64483cd5e26946f576fb2ec4b5197&longUrl=${link}`,
         { method: 'GET' })
         .then(res => {
+            console.log(`https://api-ssl.bitly.com/v3/shorten?access_token=7b1d19e650e64483cd5e26946f576fb2ec4b5197&longUrl=${link}`)
             return res.json();
         })
         .then(data => {
+            console.log(data);
             console.log(data.data.url)
             dispatch(saveBitlyLink(data.data.url))
         })

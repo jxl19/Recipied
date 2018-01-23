@@ -27,6 +27,8 @@ describe('recipeReducer', () => {
     const file = 'file.jpg';
     const uuid = '123123';
     const token = '123123'; 
+    const link = "placeholder"
+    const linkCreated = false;
 
     it('Should set the initial state when nothing is passed in', () => {
         const state = recipeReducer(undefined, {type: '__UNKNOWN'});
@@ -53,7 +55,9 @@ describe('recipeReducer', () => {
             imagePreviewUrl: '',
             uuid: '',
             token: '',
-            loading:false
+            loading:false,
+            link: '',
+            linkCreated: false
         });
     });
     it('Should return the current state on an unknown action', () => {

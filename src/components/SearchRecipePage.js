@@ -11,7 +11,6 @@ class SearchRecipePage extends React.Component {
     }
     handleClick(e) {
         e.preventDefault();
-        // window.location.href -- direct liknk to current page
         this.props.dispatch(createBitlyLink(window.location.href))
     }
     handleCopy = (e) => {

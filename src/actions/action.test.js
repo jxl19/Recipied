@@ -1,4 +1,4 @@
-import {sendRecipe, SEND_RECIPE, ADD_FINISHED, addFinished, GET_RECIPE, getRecipe, LOAD_TO, loadTo, LOGIN_FINISHED, loginFinished, GET_ID, getId, RECIPE_DATA, recipeData, getUser, GET_USER, RECIPE_DELETED, recipeDeleted, DB_CLICKED, dbClicked, ADD_RLIST, addRList, ADD_STEP_LIST, addStepList, ADD_FILE, addFiles, ADD_IMG, addImg, SAVE_ID, saveId} from './action';
+import {sendRecipe, SEND_RECIPE, ADD_FINISHED, addFinished, GET_RECIPE, getRecipe, LOAD_TO, loadTo, LOGIN_FINISHED, loginFinished, GET_ID, getId, RECIPE_DATA, recipeData, getUser, GET_USER, RECIPE_DELETED, recipeDeleted, DB_CLICKED, dbClicked, ADD_RLIST, addRList, ADD_STEP_LIST, addStepList, ADD_FILE, addFiles, ADD_IMG, addImg, SAVE_ID, saveId, SAVE_BITLY_LINK, saveBitlyLink} from './action';
 
 describe('send recipename', () => {
   it('should create an action to add a send recipe', () => {
