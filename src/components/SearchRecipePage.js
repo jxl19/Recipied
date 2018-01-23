@@ -13,9 +13,9 @@ class SearchRecipePage extends React.Component {
         e.preventDefault();
         this.props.dispatch(createBitlyLink(window.location.href))
     }
-    handleCopy = (e) => {
+    handleCopy = (e, link) => {
         function handler (event){
-            event.clipboardData.setData('text/plain', window.location.href);
+            event.clipboardData.setData('text/plain', link);
             event.preventDefault();
             document.removeEventListener('copy', handler, true);
         }
@@ -27,7 +27,7 @@ class SearchRecipePage extends React.Component {
         
         let recipes = undefined;
         if(this.props.linkCreated) {
-            var bLink = <div onClick={this.handleCopy}><h3 className="bLink text-center">{this.props.link}</h3></div>
+            var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink text-center">{this.props.link}</h3></div>
         }
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
