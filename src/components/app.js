@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter  as Router, Route, Switch } from 'react-router-dom';
 import RecipePage from './recipePage';
 import HomePage from './HomePage';
 import LoginPage from '../login/LoginPage';
@@ -12,7 +12,6 @@ import UpdatePage from './UpdatePage';
 import ImageUpload from './ImageUpload';
 import RoutePrivate from './RoutePrivate';
 import createHistory from 'history/createBrowserHistory'
-
 
 const history = createHistory()
 class App extends React.Component {
@@ -34,7 +33,6 @@ class App extends React.Component {
                     </Switch>
                 </Router>
             </div>
-
         );
     }
 }

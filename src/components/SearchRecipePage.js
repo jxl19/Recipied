@@ -14,19 +14,19 @@ class SearchRecipePage extends React.Component {
         this.props.dispatch(createBitlyLink(window.location.href))
     }
     handleCopy = (e, link) => {
-        function handler (event){
+        function handler(event) {
             event.clipboardData.setData('text/plain', link);
             event.preventDefault();
             document.removeEventListener('copy', handler, true);
         }
-    
+
         document.addEventListener('copy', handler, true);
         document.execCommand('copy');
     }
     render() {
-        
+
         let recipes = undefined;
-        if(this.props.linkCreated) {
+        if (this.props.linkCreated) {
             var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink text-center">{this.props.link}</h3></div>
         }
         if (this.props.recipeData) {
@@ -56,12 +56,12 @@ class SearchRecipePage extends React.Component {
                             <h3>Steps</h3>
                             <div className='col-xs-12 step-list'>{steps}</div>
                         </div>
-                        <div onClick={e => this.handleClick(e)}>
-                            <h3 className="create-bitly text-center">
+                        <div className="create-bitly" onClick={e => this.handleClick(e)}>
+                            <h3 className="text-center">
                                 Create bitly link
                                 </h3>
                         </div>
-                                {bLink}
+                        {bLink}
                     </div>
 
                 )
