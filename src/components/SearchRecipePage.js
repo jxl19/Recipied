@@ -19,19 +19,17 @@ class SearchRecipePage extends React.Component {
             event.preventDefault();
             document.removeEventListener('copy', handler, true);
         }
-
         document.addEventListener('copy', handler, true);
         document.execCommand('copy');
     }
     render() {
-
         let recipes = undefined;
         if (this.props.linkCreated) {
             var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink text-center">{this.props.link}</h3></div>
         }
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
-                let imglocation = `${API_BASE_URL}/file/${recipe.image}`;
+                let imglocation = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
                 let image = <img className='imagefile col-xs-6' src={imglocation} />
                 let ingredients = recipe.ingredients.map(ingredient => {
                     return <div className='col-xs-6'>{ingredient}</div>
@@ -63,7 +61,6 @@ class SearchRecipePage extends React.Component {
                         </div>
                         {bLink}
                     </div>
-
                 )
             })
         }
@@ -84,6 +81,5 @@ const mapStateToProps = (state) => ({
     link: state.link,
     linkCreated: state.linkCreated
 })
-
 
 export default connect(mapStateToProps)(SearchRecipePage);

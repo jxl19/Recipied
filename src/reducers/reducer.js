@@ -25,7 +25,8 @@ const initialState = {
     token: '',
     loading: false,
     link: '',
-    linkCreated: false
+    linkCreated: false,
+    fileType: ''
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -85,6 +86,12 @@ export const GET_USER = 'GET_USER';
 export const getUser = (data) => ({
     type: GET_USER,
     payload: data
+})
+
+export const FILE_TYPE = 'FILE_TYLE';
+export const fileType = (data) => ({
+    type: FILE_TYPE,
+    payload:data
 })
 
 export const RECIPE_DELETED = 'RECIPE_DELETED';
@@ -259,6 +266,12 @@ export const recipeReducer = (state = initialState, action) => {
         })
         return state;
     }
+    if(action.type === actions.FILE_TYPE) {
+        state = Object.assign({}, state, {
+            fileType : action.payload
+        })
+        return state;
+    }
     return state;
 };
 var token;
@@ -353,7 +366,7 @@ export const getUserName = (user_id) => (dispatch) => {
         .catch(err => console.log(`${err}`))
 }
 
-export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, userid) => (dispatch) => {
+export const submitRecipe = (recipeName, ingredient, calories, steps, id, userid) => (dispatch) => {
     fetch(`${API_BASE_URL}/recipes`,
         {
             method: 'POST',
@@ -366,7 +379,7 @@ export const submitRecipe = (recipeName, ingredient, calories, steps, uuid, user
                 ingredients: ingredient,
                 calories: calories,
                 steps: steps,
-                image: uuid,
+                image: id,
                 userid: userid
             }),
         })

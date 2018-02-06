@@ -18,7 +18,6 @@ class RecipePage extends React.Component {
       }
       
       componentDidMount() {
-          console.log('didmoint');
         this.props.dispatch(getAllRecipes());
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
@@ -47,11 +46,7 @@ class RecipePage extends React.Component {
             history.push('/recipepage/' + this.props.id);
             return <Redirect to={"/recipepage/" + this.props.id} />
         }
-        // var clientWidth = function () {  return Math.max(window.innerWidth, document.documentElement.clientWidth);};
-        // var clientHeight = function () {  return Math.max(window.innerHeight, document.documentElement.clientHeight);};
         var userid = sessionStorage.getItem('id');
-        console.log(userid);
-        console.log(this.props.existingRecipes);
         let recipes = undefined;
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.49;

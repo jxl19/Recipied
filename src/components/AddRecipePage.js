@@ -13,10 +13,10 @@ class AddRecipePage extends React.Component {
         var userid = sessionStorage.getItem('id');
         const recipeName = this.recipeName.value.toLowerCase();
         const calories = this.calories.value;
-        const uuid = this.props.id
+        const id = this.props.id +"."+ this.props.fileType;
         const steps = this.stepBox.value;
         const ingredient = this.ingredientBox.value;
-        this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, uuid, userid));
+        this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, id, userid));
     }
     handleKeyPress = (event) => {
         if(event.key == 'Enter' && this.ingredientInput.value !== ''){
@@ -66,7 +66,8 @@ const mapStateToProps = (state) => ({
     stepsList: state.stepsList,
     file: state.file,
     id : state.uuid,
-    token: state.token
+    token: state.token,
+    fileType: state.fileType
 })
 
 export default connect(mapStateToProps)(AddRecipePage);

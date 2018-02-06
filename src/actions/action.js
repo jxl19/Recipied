@@ -109,3 +109,9 @@ export const saveBitlyLink = (data) => ({
     type: SAVE_BITLY_LINK,
     payload: data
 })
+
+export const FILE_TYPE = 'FILE_TYLE';
+export const fileType = (data) => ({
+    type: FILE_TYPE,
+    payload:data
+})
