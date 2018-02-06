@@ -11,7 +11,7 @@ class SearchRecipePage extends React.Component {
     }
     handleClick(e) {
         e.preventDefault();
-        this.props.dispatch(createBitlyLink(window.location.href))
+        this.props.dispatch(createBitlyLink(window.location.href));
     }
     handleCopy = (e, link) => {
         function handler(event) {
@@ -21,6 +21,7 @@ class SearchRecipePage extends React.Component {
         }
         document.addEventListener('copy', handler, true);
         document.execCommand('copy');
+        window.alert('Copied Link');
     }
     render() {
         let recipes = undefined;

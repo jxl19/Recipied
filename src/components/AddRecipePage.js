@@ -13,7 +13,7 @@ class AddRecipePage extends React.Component {
         var userid = sessionStorage.getItem('id');
         const recipeName = this.recipeName.value.toLowerCase();
         const calories = this.calories.value;
-        const id = this.props.id +"."+ this.props.fileType;
+        const id = this.props.id;
         const steps = this.stepBox.value;
         const ingredient = this.ingredientBox.value;
         this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, id, userid));

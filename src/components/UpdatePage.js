@@ -37,7 +37,6 @@ class UpdatePage extends React.Component {
         }
     }
     handleUpdate(e, recipe) {
-        //add in the filetype here too
         e.preventDefault();
         let uuid = recipe.image;
         if(this.props.uuid) {
@@ -70,7 +69,6 @@ class UpdatePage extends React.Component {
                     return <textarea className='col-xs-12' id="step" key={i} defaultValue={steps} onChange={this.handleChange.bind(this)} ref={(input) => this.step = input} ></textarea>
                 })
                 let test = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
-                // let test = 'https://s3-us-west-1.amazonaws.com/recipied/uploads/92b3796c-938b-437b-a6f7-b820484077d8.png';
                 let image = <img className='imagefile col-xs-6'src={test} />
                 return (
                     <div className="col-xs-12" key={i}>

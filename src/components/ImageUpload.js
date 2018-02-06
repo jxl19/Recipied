@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {uploadImage, fileType} from '../reducers/reducer';
+import {uploadImage} from '../reducers/reducer';
 import {addFiles} from '../actions/action';
 import './ImageUpload.css';
 
@@ -14,7 +14,6 @@ class ImageUpload extends React.Component {
       e.preventDefault();
       var fileExt = this.state.file.name.split('.').pop();
       this.props.dispatch(uploadImage(this.state.file));
-      this.props.dispatch(fileType(fileExt))
       window.alert("uploaded");
     }
   

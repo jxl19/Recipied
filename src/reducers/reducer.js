@@ -25,8 +25,7 @@ const initialState = {
     token: '',
     loading: false,
     link: '',
-    linkCreated: false,
-    fileType: ''
+    linkCreated: false
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -86,12 +85,6 @@ export const GET_USER = 'GET_USER';
 export const getUser = (data) => ({
     type: GET_USER,
     payload: data
-})
-
-export const FILE_TYPE = 'FILE_TYLE';
-export const fileType = (data) => ({
-    type: FILE_TYPE,
-    payload:data
 })
 
 export const RECIPE_DELETED = 'RECIPE_DELETED';
@@ -161,7 +154,6 @@ export const recipeReducer = (state = initialState, action) => {
         return state;
     }
     if (action.type === actions.GET_RECIPE) {
-        console.log(action.payload);
         state = Object.assign({}, state, {
             recipes: action.payload
         });
@@ -253,6 +245,7 @@ export const recipeReducer = (state = initialState, action) => {
         state = Object.assign({}, state, {
             uuid: action.payload
         })
+        return state;
     }
     if (action.type === actions.LOADING_BAR) {
         state = Object.assign({}, state, {
@@ -263,12 +256,6 @@ export const recipeReducer = (state = initialState, action) => {
         state = Object.assign({}, state, {
             link: action.payload,
             linkCreated: true
-        })
-        return state;
-    }
-    if(action.type === actions.FILE_TYPE) {
-        state = Object.assign({}, state, {
-            fileType : action.payload
         })
         return state;
     }
@@ -430,7 +417,6 @@ export const getAllRecipes = () => (dispatch) => {
             return res.json();
         })
         .then(res => {
-            console.log(res);
             dispatch(getRecipe(res));
         })
         .catch(err => console.log(`error getting recipes ${err}`))
@@ -484,22 +470,21 @@ export const updateRecipe = (ingredient, step, calories, dishName, recipeId, uui
 }
 
 export const uploadImage = (img) => (dispatch) => {
+    dispatch(loadingBar(true));
     let data = new FormData();
     data.append('file', img);
     data.append('name', img.name);
     fetch(`${API_BASE_URL}/upload`,
         {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-            },
             body: data
         })
         .then(res => {
             return res.json();
         })
         .then(data => {
-            dispatch(saveId(data.imageid))
+            dispatch(saveId(data.imageid));
+            dispatch(loadingBar(false));
         })
         .catch(err => console.log(`${err}`));
 }
