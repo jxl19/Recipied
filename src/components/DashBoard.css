@@ -11,15 +11,11 @@ h4:hover {
 
 .dashboard-nav>ul>li{
     display:inline-block;
-    /* margin-left:10%; */
 }
 .dashboard-nav li:not(:first-child){
     margin-left:14%;
 }
 .recipe-page{
-    /* height: 100%;  */
-    /* margin-top:0px; */
-    /* margin-bottom:0px; */
     line-height:7px;
     font-size: 18px;
 }

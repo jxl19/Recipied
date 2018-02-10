@@ -7,7 +7,7 @@ import { Table, Column, Cell } from 'fixed-data-table';
 import DashBoard from './DashBoard';
 import { Redirect } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-//change search value to tolowercase
+
 const history = createHistory()
 class RecipePage extends React.Component {
     constructor(props) {
@@ -50,7 +50,7 @@ class RecipePage extends React.Component {
         let recipes = undefined;
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.49;
-        let tableHeight = (this.props.existingRecipes.length + 1) *71.2;
+        let tableHeight = (this.props.existingRecipes.length + 1) *69.8;
         if (this.props.existingRecipes.length > 0) {
             recipes =
                 <Table className="centerdiv"
@@ -89,9 +89,6 @@ class RecipePage extends React.Component {
                         <form className="js-search-form" onSubmit={e => this.onSubmit(e)}>
                             <div className="form-group">
                                 <input type="text" name="getRecipe" className="submit-form" placeholder="Search for recipe names" ref={(input) => this.recipe = input} />
-                                {/* <div className="search">
-                                    <i className="glyphicon glyphicon-search"></i>
-                                </div> */}
                             </div>
                         </form>
                     </div>

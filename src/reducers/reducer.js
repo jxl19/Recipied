@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL, BITLY_URL } from '../config';
 import * as actions from '../actions/action';
 const initialState = {
     recipeName: '',
@@ -262,7 +262,7 @@ export const recipeReducer = (state = initialState, action) => {
     return state;
 };
 var token;
-//dispatch an action that puts up a loading bar, then remove loading bar as soon as its over
+
 export const login = (data) => (dispatch) => {
     dispatch(loadingBar(true));
     fetch(`${API_BASE_URL}/users/login`, {
@@ -271,10 +271,9 @@ export const login = (data) => (dispatch) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)      //username, password
+        body: JSON.stringify(data)
     })
         .then(res => {
-            //json info in here from server
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
@@ -296,7 +295,6 @@ export const login = (data) => (dispatch) => {
         })
 }
 
-//will also need to make a sign in page 
 export const createUser = (data) => (dispatch) => {
     fetch(`${API_BASE_URL}/users/signup`,
         {
@@ -311,7 +309,6 @@ export const createUser = (data) => (dispatch) => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
-            //dispatch action to login
             dispatch(login(data))
         })
 }
@@ -331,7 +328,7 @@ export const deleteRecipe = (id) => (dispatch) => {
         })
         .catch(err => console.log(`${err}`))
 }
-//gets recipes made by user
+
 export const getUserName = (user_id) => (dispatch) => {
     fetch(`${API_BASE_URL}/recipes/user/${user_id}`,
         {
@@ -474,7 +471,6 @@ export const uploadImage = (img) => (dispatch) => {
     let data = new FormData();
     data.append('file', img);
     data.append('name', img.name);
-    console.log(data);
     fetch(`${API_BASE_URL}/upload`,
         {
             method: 'POST',
@@ -484,13 +480,12 @@ export const uploadImage = (img) => (dispatch) => {
             return res.json();
         })
         .then(data => {
-            console.log("data: " + data)
             dispatch(saveId(data.imageid));
             dispatch(loadingBar(false));
         })
         .catch(err => console.log(`${err}`));
 }
-//logout to remove sessionstorage
+
 export const logOut = () => (dispatch) => {
     fetch(`${API_BASE_URL}/users/logout`,
         {
@@ -501,9 +496,8 @@ export const logOut = () => (dispatch) => {
         })
         .catch(err => console.log(`${err}`));
 }
-
 export const createBitlyLink = (link) => (dispatch) => {
-    fetch(`https://api-ssl.bitly.com/v3/shorten?access_token=7b1d19e650e64483cd5e26946f576fb2ec4b5197&longUrl=${link}`,
+    fetch(`${BITLY_URL}${link}`,
         { method: 'GET' })
         .then(res => {
             return res.json();

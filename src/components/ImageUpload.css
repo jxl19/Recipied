@@ -26,7 +26,6 @@
     margin-top:15px;
 }
 
-/* media query for how big the form will be */
 @media (min-width: 640px) {
     .image-form{
         margin-left:21%;

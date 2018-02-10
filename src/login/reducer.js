@@ -11,22 +11,17 @@ export const loginFinished = (cred) => ({
     payload: cred
 })
 
-//reducxcer check for type ofaction, check payload for the state which is okay, then isloggedin:true, then compnent will render data based on state
-
 export const loginReducer = (state = initialState, action) => {
     if (action.type === LOGIN_FINISHED) {
-        console.log(action.payload) 
         state = Object.assign({}, state, {
             secretWord:action.payload
         })
-        console.log(state);
         return state;
     }
     return state;
 }
 
 export const login = (data) => (dispatch) => {
-    console.log("login credentials", data)
     fetch('http://localhost:8080/api/users/login', {
         method: 'post',
         headers: {
@@ -35,8 +30,6 @@ export const login = (data) => (dispatch) => {
         },
         body: JSON.stringify(data)      //username, password
     }).then(res => {
-        //json info in here from server
-        // console.log(res.json());
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
