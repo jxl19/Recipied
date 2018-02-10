@@ -14,6 +14,9 @@
     line-height: normal;
     background-color:rgba(88, 88, 68, 0.56);
     width:100%;
+    text-align: center;
+    font-family: Dosis;
+    font-size:20px;
   }
 .header-about > h3{ 
     color:rgba(211, 240, 243, 0.96);

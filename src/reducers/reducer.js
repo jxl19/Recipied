@@ -474,6 +474,7 @@ export const uploadImage = (img) => (dispatch) => {
     let data = new FormData();
     data.append('file', img);
     data.append('name', img.name);
+    console.log(data);
     fetch(`${API_BASE_URL}/upload`,
         {
             method: 'POST',
@@ -483,6 +484,7 @@ export const uploadImage = (img) => (dispatch) => {
             return res.json();
         })
         .then(data => {
+            console.log("data: " + data)
             dispatch(saveId(data.imageid));
             dispatch(loadingBar(false));
         })

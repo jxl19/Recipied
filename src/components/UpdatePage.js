@@ -63,18 +63,17 @@ class UpdatePage extends React.Component {
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
                 let ingredients = recipe.ingredients.map(ingredient => {
-                    return <textarea className='col-xs-12' id="ingredient" key={i} defaultValue={ingredient} onChange={this.handleChange.bind(this)} ref={(input) => this.ingredient = input}></textarea>
+                    return <textarea className='update-ingredient' id="ingredient" key={i} defaultValue={ingredient} onChange={this.handleChange.bind(this)} ref={(input) => this.ingredient = input}></textarea>
                 })
                 let steps = recipe.steps.map(steps => {
-                    return <textarea className='col-xs-12' id="step" key={i} defaultValue={steps} onChange={this.handleChange.bind(this)} ref={(input) => this.step = input} ></textarea>
+                    return <textarea className='update-step' id="step" key={i} defaultValue={steps} onChange={this.handleChange.bind(this)} ref={(input) => this.step = input} ></textarea>
                 })
                 let test = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
-                let image = <img className='imagefile col-xs-6'src={test} />
+                let image = <img className='imagefile'src={test} />
                 return (
-                    <div className="col-xs-12" key={i}>
-                        <div className='card col-xs-11'>
+                        <div className='card' key={i}>
                             <section className='card-block'>
-                                <h2 className='card-header head'>Recipe Update</h2>
+                                <h1 className='card-header head'>Recipe Update</h1>
                                 <label className='dishupdate'>Dishname
                                 <input defaultValue={recipe.dishName} id="dishName" onChange={this.handleChange.bind(this)} ref={(input) => this.dishName = input}></input>
                                 </label>
@@ -95,14 +94,13 @@ class UpdatePage extends React.Component {
                                 <h3>{image}</h3>
                             </section>
                             <h1>Upload a new image if you wish to change image</h1>
-                            <div className="test1">
+                            <div className="image-change">
                                 <ImageUpload/>
                             </div>
-                            <button className="btn-success recipe-forms" onClick={(e) => this.handleUpdate(e, recipe)}>
+                            <div className="btn-success update-button" onClick={(e) => this.handleUpdate(e, recipe)}>
                                 update recipe
-                            </button>
+                            </div>
                         </div>
-                    </div>
                 )
             })
         }

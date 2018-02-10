@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { createUser } from '../reducers/reducer';
 import { Redirect } from 'react-router-dom';
 import Spinner from 'react-spinkit';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 //if theres token automatically redirect
 import createHistory from 'history/createBrowserHistory'

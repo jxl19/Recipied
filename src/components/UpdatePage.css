@@ -2,7 +2,7 @@
     padding-left:0;
 }
 
-.recipe-forms{
+/* .recipe-forms{
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -12,26 +12,70 @@
     margin-left:1%;
     width:98%;
     margin-top:10px;
-    padding: 6px 12px;
     font-size: 14px;
     font-weight: 400;
+} */
+
+.card-block{
+    padding-left: 0px;
+    padding-right:0px;
 }
 
 .mtop{
     margin-top:50px;
 }
 
-.test1{
+.image-change{
     width:98%;
-    margin-left:-19%
+    margin-left:-19.5%
 }
 
 .dishupdate{
+    display: inline-block;
     width:50%;
 }
 
 .calupdate{
     width:50%;
+}
+
+#calories,#dishName{
+    margin-left:10px;
+}
+
+h3 textarea{
+    height:100px;
+    width:98%;
+}
+.card-block h1, .card-block label, .card-block h3{
+    padding-left: 10px;
+}
+
+.card h1{
+    padding-left: 10px;
+}
+
+.card {
+    border: 1px solid black;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+}
+
+.card-text{
+    margin-bottom: 7px;
+}
+
+.update-button{
+    margin-top:10px;
+    padding-bottom:10px;
+    border-bottom: none;
+}
+
+.card-header{
+    border-bottom: 1px solid black;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {

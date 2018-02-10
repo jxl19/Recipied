@@ -17,6 +17,15 @@
     width:95%;
 }
 
+.fileInput{
+    display:inline-block;
+    width:50%;
+}
+
+.imgPreview{
+    margin-top:15px;
+}
+
 /* media query for how big the form will be */
 @media (min-width: 640px) {
     .image-form{

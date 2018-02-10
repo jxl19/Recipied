@@ -11,6 +11,9 @@
 .btn-success{
     color:black;
     background-color: rgba(148, 158, 95, 0.4);
+    padding-top:12px;
+    padding-bottom:0px;
+    text-align: center;
 }
 
 .btn-success:hover{

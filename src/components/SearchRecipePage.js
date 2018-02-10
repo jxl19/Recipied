@@ -31,29 +31,29 @@ class SearchRecipePage extends React.Component {
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
                 let imglocation = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
-                let image = <img className='imagefile col-xs-6' src={imglocation} />
+                let image = <img className='imagefile' src={imglocation} />
                 let ingredients = recipe.ingredients.map(ingredient => {
-                    return <div className='col-xs-6'>{ingredient}</div>
+                    return <div className='ing'>{ingredient}</div>
                 })
                 let steps = recipe.steps.map(step => {
-                    return <div className='col-xs-12'>{step}</div>
+                    return <div className='steps'>{step}</div>
                 })
                 return (
-                    <div className='col-xs-12' key={i}>
-                        <section className='upper-container col-xs-12'>
-                            <h3 className='col-xs-6'>{recipe.dishName}</h3>
+                    <div className='recipe-container' key={i}>
+                        <section className='upper-container'>
+                            <h3 className='dishname'>{recipe.dishName}</h3>
                             {image}
-                            <div className='col-xs-12'>
+                            <div className='calories'>
                                 <h3>Calories: {recipe.calories}</h3>
                             </div>
                         </section>
-                        <section className='middle-container col-xs-12'>
+                        <section className='middle-container'>
                             <h3>Ingredients</h3>
-                            <div className='col-xs-12 ingredient-list'>{ingredients}</div>
+                            <div className='ingredient-list'>{ingredients}</div>
                         </section>
-                        <div className='lower-container col-xs-12'>
+                        <div className='lower-container'>
                             <h3>Steps</h3>
-                            <div className='col-xs-12 step-list'>{steps}</div>
+                            <div className='step-list'>{steps}</div>
                         </div>
                         <div className="create-bitly" onClick={e => this.handleClick(e)}>
                             <h3 className="text-center">

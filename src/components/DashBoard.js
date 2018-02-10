@@ -26,31 +26,31 @@ class DashBoard extends React.Component {
         }
         return (
             <nav className="dashboard-nav">
-                <div className="navWide ">
-                <div onClick={(e) => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-2 logohome" id="home">Recipied</h4>
-                    </div>
-                    <div onClick={(e) => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-2" id="home">Search Recipes</h4>
-                    </div>
-                    <div onClick={e => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-2" id="myrecipes">
+                <ul className="navWide">
+                <li id="home" onClick={(e) => this.handleClick(e)}>
+                        <h4 className="recipe-page logohome" id="home">Recipied</h4>
+                    </li>
+                    <li id="home" onClick={(e) => this.handleClick(e)}>
+                        <h4 className="recipe-page" id="home">Search Recipes</h4>
+                    </li>
+                    <li id="myrecipes" onClick={e => this.handleClick(e)}>
+                        <h4 className="recipe-page" id="myrecipes">
                             My Recipes
                 </h4>
-                    </div>
-                    <div onClick={e => this.handleClick(e)}>
-                        <h4 className="recipe-page col-xs-2" id="addrecipes">
+                    </li>
+                    <li id="addrecipes"onClick={e => this.handleClick(e)}>
+                        <h4 className="recipe-page" id="addrecipes">
                             Add Recipe
                 </h4>
-                    </div>
-                    <div onClick={e => this.logout(e)}>
-                        <h4 className="recipe-page col-xs-2" id="/">
+                    </li>
+                    <li id="/"onClick={e => this.logout(e)}>
+                        <h4 className="recipe-page" id="/">
                             Sign-Out
                 </h4>
-                    </div>
-                </div>
+                    </li>
+                </ul>
                 <div className="navNarrow">
-					<i className="glyphicon glyphicon-menu-hamburger" onClick={this.burgerToggle}></i>
+					<i className="fas fa-bars fa-3x" onClick={this.burgerToggle}></i>
 					<div className="narrowLinks">
                     <div onClick={(e) => this.handleClick(e)}>
                     <h4 className="burgermenu"id="home">Search Recipes</h4>

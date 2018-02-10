@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter  as Router, Route, Switch } from 'react-router-dom';
 import RecipePage from './recipePage';
-import HomePage from './HomePage';
 import LoginPage from '../login/LoginPage';
 import SignUpPage from '../login/SignUpPage';
 import SearchRecipePage from './SearchRecipePage';
@@ -21,7 +20,6 @@ class App extends React.Component {
             <div className="app">
                 <Router history={history}>
                     <Switch>
-                        <RoutePrivate path="/homepage" component={HomePage}/>
                         <RoutePrivate exact path="/myrecipes" component={MyRecipePage} />
                         <RoutePrivate exact path ="/addrecipes" component ={AddRecipePage}/>
                         <RoutePrivate exact path="/home" component={RecipePage}/>

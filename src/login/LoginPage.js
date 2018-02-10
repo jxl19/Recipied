@@ -22,7 +22,7 @@ class LoginPage extends React.Component {
         return (
             <div className="landing-page">
                 <section className="about-landing">
-                    <div className="header-about text-center">
+                    <div className="header-about">
                         <h3> Reciped allows for you to upload your own recipes or search for recipes that have been uploaded to this site.  </h3>
                     </div>
                 </section>

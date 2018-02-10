@@ -81,14 +81,14 @@ class MyRecipePage extends React.Component {
             />
             <Column
                 cell={props => (
-                    <Cell className="glyphicon glyphicon-edit"{...props} onClick={e=>this.handleClick(e, this.props.userData[props.rowIndex].id)}>
+                    <Cell className="far fa-edit"{...props} onClick={e=>this.handleClick(e, this.props.userData[props.rowIndex].id)}>
                     </Cell>
                   )}
                 width={buttonWidth}
             />
             <Column
                 cell={props => (
-                    <Cell className="glyphicon glyphicon-remove-circle"{...props} onClick={e=>this.handleDelete(e, this.props.userData[props.rowIndex].id)}>
+                    <Cell className="far fa-trash-alt"{...props} onClick={e=>this.handleDelete(e, this.props.userData[props.rowIndex].id)}>
                     </Cell>
                   )}
                 width={buttonWidth}
@@ -106,7 +106,7 @@ class MyRecipePage extends React.Component {
         return (
             <div>
                 < DashBoard />
-                <div className="centerdiv col-xs-12 myrecipeboard">
+                <div className="centerdiv myrecipeboard">
                     {user}
                 </div>
             </div>

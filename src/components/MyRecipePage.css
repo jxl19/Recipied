@@ -1,21 +1,5 @@
-.col-xs-5{
-    padding-left:0px;
-    padding-right: 0px;
-}
-
 h4{
     line-height:2.4;
-}
-
-.card{
-    border-radius:0;
-    margin-top: 10px;
-}
-
-.card-header{
-    border-bottom: 1px solid black;
-    padding-left:10px;
-    padding-right:10px;
 }
 
 .update{
@@ -33,10 +17,6 @@ h4{
 .btn-primary{
     color:black;
     background-color: rgba(51, 122, 183, 0.59);
-}
-.card-block{
-    padding-left:10px;
-    padding-right:10px;
 }
 .glyphicon {
     top: 30%;

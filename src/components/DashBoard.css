@@ -1,8 +1,3 @@
-.recipe-page{
-    width:23.75%;
-    text-align:right;
-}
-
 h4:hover {
     position: relative;
     color: white;
@@ -10,32 +5,27 @@ h4:hover {
     cursor: pointer;
 }
 
-/* .recipe-page:before{ 
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    visibility: hidden;
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transition: all 0.3s ease-in-out 0s;
-    transition: all 0.3s ease-in-out 0s;
+.narrowLinks h4:hover{
+    color: black;
 }
 
-.recipe-page:hover:before{
-        visibility: visible;
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-} */
-
+.dashboard-nav>ul>li{
+    display:inline-block;
+    /* margin-left:10%; */
+}
+.dashboard-nav li:not(:first-child){
+    margin-left:14%;
+}
 .recipe-page{
-    height: 100%; 
-    margin-top:0px;
-    margin-bottom:0px;
-    line-height:50px;
+    /* height: 100%;  */
+    /* margin-top:0px; */
+    /* margin-bottom:0px; */
+    line-height:7px;
+    font-size: 18px;
+}
+
+.dashboard-nav li h4 {
+    font-weight:500;
 }
 
 .dashboard-nav{
@@ -49,19 +39,19 @@ h4:hover {
 
 .logohome{
     font-family: dosis;
-    width:5%;
 }
 
 .navWide {
     display: none;
     margin: 0 auto;
+    margin-left:5%;
 }
 
 .narrowLinks {
     display: none;
     text-align: center;
     border: 1px solid rgba(153, 153, 153, 0.77);
-    margin-top: -3px;
+    margin-top: 2px;
 }
 
 .narrowLinks> a {
@@ -78,11 +68,16 @@ h4:hover {
     margin-left:15px;
 }
 
+.fa-bars{
+    margin-left:5%;
+    color:white;
+}
+
 .burgermenu:hover{
     text-decoration: underline;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1150px) {
 	
 		.navWide {
 			display: block;

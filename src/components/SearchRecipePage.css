@@ -35,3 +35,32 @@
     overflow-x: hidden;
 }
 
+.dishname{
+    display:inline-block;
+    width:50%;
+}
+
+.middle-container h3{
+    margin-top:0px;
+}
+
+.middle-container{
+    padding-top:15px;
+}
+
+.middle-container, .lower-container{
+    padding-bottom: 15px;
+}
+.recipe-container{
+    margin-top: 10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.recipe-container h3{
+    margin-left: 10px;
+}
+
+.ing, .steps{
+    margin-left:10px;
+}

@@ -43,16 +43,16 @@ class AddRecipePage extends React.Component {
                 <DashBoard />
                 <form className="js-search-formm">
                     <div className="form-group">
-                        <input type="text" name="recipeName" className="recipe-form col-xs-6" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
-                        <input className='ingredientInput recipe-form col-xs-6' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
-                        <textarea className='ingredientBox recipe-form col-xs-6' ref={(input) => this.ingredientBox = input}></textarea>
-                        <input type="text" name="calories" className="recipe-form col-xs-6" placeholder="Enter Calories" ref={(input) => this.calories = input} />
-                        <input className='stepInput recipe-form col-xs-6' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
-                        <textarea className='stepBox recipe-form col-xs-6' ref={(input) => this.stepBox = input}></textarea>
+                        <input type="text" name="recipeName" className="recipe-form" placeholder="Enter Recipe Name" ref={(input) => this.recipeName = input} />
+                        <input className='ingredientInput recipe-form' placeholder ="input ingredient" onKeyPress={this.handleKeyPress} ref={(input) => this.ingredientInput = input}/>
+                        <textarea className='ingredientBox recipe-form' ref={(input) => this.ingredientBox = input}></textarea>
+                        <input type="text" name="calories" className="recipe-form" placeholder="Enter Calories" ref={(input) => this.calories = input} />
+                        <input className='stepInput recipe-form' placeholder="input step" onKeyPress={this.handleKeyPress} ref={(input) => this.stepInput = input}/>
+                        <textarea className='stepBox recipe-form' ref={(input) => this.stepBox = input}></textarea>
                         <ImageUpload />
-                        <button type ="button" className="btn-success recipe-form search col-xs-6" onClick ={e => this.handleClick(e)}>
+                        <div className="btn-success recipe-form search" onClick ={e => this.handleClick(e)}>
                             Add Recipe
-                        </button>
+                        </div>
                     </div>
                 </form>
             </div>

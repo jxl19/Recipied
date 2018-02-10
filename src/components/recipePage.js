@@ -84,14 +84,14 @@ class RecipePage extends React.Component {
                 <DashBoard />
                 <div className="logo">
                 </div>
-                <div className="jumbotron jumbotron-fluid jumbotron-bg">
+                <div className="search-bg">
                     <div className="container">
-                        <form className="js-search-form col-md-12" onSubmit={e => this.onSubmit(e)}>
+                        <form className="js-search-form" onSubmit={e => this.onSubmit(e)}>
                             <div className="form-group">
-                                <input type="text" name="getRecipe" className="submit-form col-xs-6" placeholder="search for recipe" ref={(input) => this.recipe = input} />
-                                <div className="search col-xs-1">
+                                <input type="text" name="getRecipe" className="submit-form" placeholder="Search for recipe names" ref={(input) => this.recipe = input} />
+                                {/* <div className="search">
                                     <i className="glyphicon glyphicon-search"></i>
-                                </div>
+                                </div> */}
                             </div>
                         </form>
                     </div>
