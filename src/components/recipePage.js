@@ -50,7 +50,7 @@ class RecipePage extends React.Component {
         let recipes = undefined;
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.49;
-        let tableHeight = (this.props.existingRecipes.length + 1) *50.5;
+        let tableHeight = (this.props.existingRecipes.length + 1) *71.2;
         if (this.props.existingRecipes.length > 0) {
             recipes =
                 <Table className="centerdiv"

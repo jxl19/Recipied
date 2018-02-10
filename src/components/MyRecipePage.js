@@ -51,7 +51,7 @@ class MyRecipePage extends React.Component {
         }
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.40;
-        let tableHeight = (this.props.userData.length + 1) *50.29999;
+        let tableHeight = (this.props.userData.length + 1) *69.2;
         let buttonWidth = this.state.width*0.0899;
         let user = undefined;
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
