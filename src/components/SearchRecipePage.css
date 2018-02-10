@@ -6,6 +6,13 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.create-bitly, .bLink{
+    text-align: center;
+}
+.image{
+    display: inline-block;
+    vertical-align: top;
+}
 
 .middle-container{ 
     border: 1px solid black;

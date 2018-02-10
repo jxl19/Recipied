@@ -54,7 +54,7 @@ class RecipePage extends React.Component {
         if (this.props.existingRecipes.length > 0) {
             recipes =
                 <Table className="centerdiv"
-                    rowHeight={50}
+                    rowHeight={75}
                     headerHeight={50}
                     rowsCount={this.props.existingRecipes.length}
                     width={tableWidth}

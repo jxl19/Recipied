@@ -26,7 +26,7 @@ class SearchRecipePage extends React.Component {
     render() {
         let recipes = undefined;
         if (this.props.linkCreated) {
-            var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink text-center">{this.props.link}</h3></div>
+            var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink">{this.props.link}</h3></div>
         }
         if (this.props.recipeData) {
             recipes = this.props.recipeData.map((recipe, i) => {
@@ -42,7 +42,7 @@ class SearchRecipePage extends React.Component {
                     <div className='recipe-container' key={i}>
                         <section className='upper-container'>
                             <h3 className='dishname'>{recipe.dishName}</h3>
-                            {image}
+                            <div className='image'>{image}</div>
                             <div className='calories'>
                                 <h3>Calories: {recipe.calories}</h3>
                             </div>
@@ -56,7 +56,7 @@ class SearchRecipePage extends React.Component {
                             <div className='step-list'>{steps}</div>
                         </div>
                         <div className="create-bitly" onClick={e => this.handleClick(e)}>
-                            <h3 className="text-center">
+                            <h3>
                                 Create bitly link
                                 </h3>
                         </div>

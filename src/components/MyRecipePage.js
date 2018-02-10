@@ -56,7 +56,7 @@ class MyRecipePage extends React.Component {
         let user = undefined;
         if (this.props.userData && this.props.userData.length > 0 || this.props.recipeDeleted) {
             user = <Table className="center"
-            rowHeight={50}
+            rowHeight={75}
             headerHeight={50}
             rowsCount={this.props.userData.length}
             width={tableWidth}
