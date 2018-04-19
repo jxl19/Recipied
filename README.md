@@ -5,13 +5,13 @@ Live link: https://reciped.netlify.com/
 # Summary
 Reciped lets you create and store recipes into the website. You are also able to search for recipes that has been created by other users. 
 
-![screenshot 24](https://user-images.githubusercontent.com/17520488/32776971-43e9f640-c8e9-11e7-8c3c-7895eb7187f6.png)
+![recipe login](https://user-images.githubusercontent.com/17520488/38970344-c5121f06-4349-11e8-9d41-72a2aa74a6b4.png)
 
-![screenshot 25](https://user-images.githubusercontent.com/17520488/32776973-49022c92-c8e9-11e7-8e57-3bd09c3c5fbb.png)
+![recipied landing](https://user-images.githubusercontent.com/17520488/38970288-6edca6e2-4349-11e8-8d7e-847f2e0f158b.png)
 
-![screenshot 27](https://user-images.githubusercontent.com/17520488/32776983-4dd1f5ae-c8e9-11e7-8fb6-0f321af8bb7b.png)
+![addform](https://user-images.githubusercontent.com/17520488/38970285-6e6e9e0e-4349-11e8-9b77-c58d204236f7.png)
 
-![screenshot 26](https://user-images.githubusercontent.com/17520488/32776979-4b8f4a62-c8e9-11e7-9d0f-d6522244cacd.png)
+![recipeslist](https://user-images.githubusercontent.com/17520488/38970287-6ec4957a-4349-11e8-9599-6e9197b00a10.png)
 
 
 # Technologies
