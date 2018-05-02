@@ -8,6 +8,7 @@ const initialState = {
     recipes: [],
     loadTo: '',
     isLoggedIn: false,
+    loginFailed: false,
     id: '',
     idSet: false,
     renderToPage: false,
@@ -140,6 +141,12 @@ export const saveBitlyLink = (data) => ({
     payload: data
 })
 
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const loginFailed = () =>({
+    type: LOGIN_FAILED,
+    payload: true
+})
+
 export const recipeReducer = (state = initialState, action) => {
     if (action.type === actions.REMOVE_STATE) {
         state = Object.assign({}, state, {
@@ -177,6 +184,11 @@ export const recipeReducer = (state = initialState, action) => {
             token: action.payload
         })
         return state;
+    }
+    if (action.type === actions.LOGIN_FAILED) {
+        state = Object.assign({}, initialState, {
+            loginFailed: true
+        })
     }
     if (action.type === actions.GET_ID) {
         state = Object.assign({}, initialState, {
@@ -288,8 +300,7 @@ export const login = (data) => (dispatch) => {
             })
                 .then(res => {
                     if (!token) {
-                        window.alert('Invalid username or password');
-                        dispatch(loadingBar(false));
+                        dispatch(loginFailed());
                     }
                 })
         })
@@ -496,6 +507,7 @@ export const logOut = () => (dispatch) => {
         })
         .catch(err => console.log(`${err}`));
 }
+
 export const createBitlyLink = (link) => (dispatch) => {
     fetch(`${BITLY_URL}${link}`,
         { method: 'GET' })

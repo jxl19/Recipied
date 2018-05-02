@@ -54,3 +54,7 @@
 .demo {
     font-weight: 900;
 }
+
+.login-failed{
+    color:red;
+}

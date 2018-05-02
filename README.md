@@ -34,8 +34,7 @@ User Created Recipe List
 * Node.js + Express.js (web server)
 * MongoDB (database)
 * Mocha + Chai (testing)
-* Continuous integration and deployment with Travis CI - View the Travis CI build status for this application.
-
+* Continuous integration and deployment with Travis CI
 # Responsive
 The application is built responsively for use on desktop and mobile devices.
 

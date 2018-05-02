@@ -16,6 +16,9 @@ class LogIn extends React.Component {
         }
     }
     renderResults() {
+        if(this.props.loginFailed) {
+            return <p className="login-failed">Invalid Username or Password</p>
+        }
         if (this.props.loading) {
             return <Spinner spinnerName="circle" noFadeIn />;
         }
@@ -77,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
     isLoggedIn: state.isLoggedIn,
     click: state.clicked,
-    loading: state.loading
+    loading: state.loading,
+    loginFailed: state.loginFailed
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogIn));

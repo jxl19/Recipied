@@ -115,3 +115,9 @@ export const fileType = (data) => ({
     type: FILE_TYPE,
     payload:data
 })
+
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const loginFailed = () =>({
+    type: LOGIN_FAILED,
+    payload: true
+})
