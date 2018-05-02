@@ -7,3 +7,6 @@ script:
   - npm test
 env:
   - CI=true
+branches:
+  except:
+    - dev-branch
