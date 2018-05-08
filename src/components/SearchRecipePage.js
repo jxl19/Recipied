@@ -24,6 +24,25 @@ class SearchRecipePage extends React.Component {
         window.alert('Copied Link');
     }
     render() {
+        let newStr;
+        function removeArr(str) {
+            for(var i = 0; i < str.length; i++) {
+            newStr = str[i];
+            }
+            newStr = newStr.split('-');
+        }
+        function splitString(str) {
+            removeArr(str);
+            var arr = [];
+            let split;
+            for (var i = 0; i < newStr.length; i++) {
+                split = newStr[i].replace('↵', '');
+                if (newStr[i] !== '') {
+                    arr.push(newStr[i].split(/\n|\r|↵/).join( '' ));
+                }
+            }
+            return arr;
+        }
         let recipes = undefined;
         if (this.props.linkCreated) {
             var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink">{this.props.link}</h3></div>
@@ -32,7 +51,8 @@ class SearchRecipePage extends React.Component {
             recipes = this.props.recipeData.map((recipe, i) => {
                 let imglocation = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
                 let image = <img className='imagefile' src={imglocation} />
-                let ingredients = recipe.ingredients.map(ingredient => {
+                var ingredientsSplit = splitString(this.props.recipeData[0].ingredients);
+                let ingredients = ingredientsSplit.map(ingredient => {
                     return <div className='ing'>{ingredient}</div>
                 })
                 let steps = recipe.steps.map(step => {
