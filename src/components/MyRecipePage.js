@@ -49,6 +49,32 @@ class MyRecipePage extends React.Component {
             history.push("/recipepage/" + this.props.id)
             return <Redirect to={"/recipepage/" + this.props.id} />
         }
+        let newStr;
+        function removeArr(str) {
+            for(var i = 0; i < str.length; i++) {
+            newStr = str[i];
+            }
+            newStr = newStr.split('-');
+        }
+        function splitString(str) {
+            removeArr(str);
+            var arr = [];
+            let split;
+            for (var i = 0; i < newStr.length; i++) {
+                split = newStr[i].replace('↵', '');
+                if (newStr[i] !== '') {
+                    arr.push(newStr[i].split(/\n|\r|↵/).join( '' ));
+                }
+            }
+            let addedHTML='';
+            for(var i = 0; i < arr.length; i++) {
+                if(i === 0) {
+                    addedHTML+= `${arr[i]}`;
+                }
+                else addedHTML += `, ${arr[i]}`;
+            }
+            return addedHTML;
+        }
         let tableWidth = this.state.width*0.98;
         let columnWidth = this.state.width*0.40;
         let tableHeight = (this.props.userData.length + 1) *69.2;
@@ -74,7 +100,7 @@ class MyRecipePage extends React.Component {
                 header={<Cell>Ingredients</Cell>}
                 cell={props => (
                     <Cell {...props}>
-                      {this.props.userData[props.rowIndex].ingredients}
+                      {splitString(this.props.userData[props.rowIndex].ingredients)}
                     </Cell>
                   )}
                 width={columnWidth}
