@@ -6,6 +6,12 @@ import { API_BASE_URL } from '../config';
 import './SearchRecipePage.css'
 
 class SearchRecipePage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            copied : 'invisible'
+        }
+    }
     componentWillMount(props) {
         this.props.dispatch(searchRecipe(this.props.match.params.id));
     }
@@ -21,13 +27,13 @@ class SearchRecipePage extends React.Component {
         }
         document.addEventListener('copy', handler, true);
         document.execCommand('copy');
-        window.alert('Copied Link');
+        this.setState({copied: 'visible'});
     }
     render() {
         let newStr;
         function removeArr(str) {
-            for(var i = 0; i < str.length; i++) {
-            newStr = str[i];
+            for (var i = 0; i < str.length; i++) {
+                newStr = str[i];
             }
             newStr = newStr.split('-');
         }
@@ -38,11 +44,12 @@ class SearchRecipePage extends React.Component {
             for (var i = 0; i < newStr.length; i++) {
                 split = newStr[i].replace('↵', '');
                 if (newStr[i] !== '') {
-                    arr.push(newStr[i].split(/\n|\r|↵/).join( '' ));
+                    arr.push(newStr[i].split(/\n|\r|↵/).join(''));
                 }
             }
             return arr;
         }
+        var linkCopied = <div className={this.state.copied}>Link copied to clipboard!</div>
         let recipes = undefined;
         if (this.props.linkCreated) {
             var bLink = <div onClick={e => this.handleCopy(e, this.props.link)}><h3 className="bLink">{this.props.link}</h3></div>
@@ -52,11 +59,12 @@ class SearchRecipePage extends React.Component {
                 let imglocation = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
                 let image = <img className='imagefile' src={imglocation} />
                 var ingredientsSplit = splitString(this.props.recipeData[0].ingredients);
+                let stepsSplit = splitString(this.props.recipeData[0].steps);
                 let ingredients = ingredientsSplit.map(ingredient => {
-                    return <div className='ing'>{ingredient}</div>
+                    return <li className='ing' key={ingredient}>{ingredient}</li>
                 })
-                let steps = recipe.steps.map(step => {
-                    return <div className='steps'>{step}</div>
+                let steps = stepsSplit.map(step => {
+                    return <li className='steps' key={step}>{step}</li>
                 })
                 return (
                     <div className='recipe-container' key={i}>
@@ -69,11 +77,11 @@ class SearchRecipePage extends React.Component {
                         </section>
                         <section className='middle-container'>
                             <h3>Ingredients</h3>
-                            <div className='ingredient-list'>{ingredients}</div>
+                            <ol className='ingredient-list'>{ingredients}</ol>
                         </section>
                         <div className='lower-container'>
                             <h3>Steps</h3>
-                            <div className='step-list'>{steps}</div>
+                            <ol className='step-list'>{steps}</ol>
                         </div>
                         <div className="create-bitly" onClick={e => this.handleClick(e)}>
                             <h3>
@@ -81,12 +89,13 @@ class SearchRecipePage extends React.Component {
                                 </h3>
                         </div>
                         {bLink}
+                        {linkCopied}
                     </div>
                 )
             })
         }
         else {
-            recipes = <h1> nothing here</h1>
+            recipes = <h1>No Recipe</h1>
         }
         return (
             <div>

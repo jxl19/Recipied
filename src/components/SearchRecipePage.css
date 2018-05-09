@@ -30,6 +30,7 @@
 
 .step-list{
     font-size: 20px;
+    /* width:100%; */
 }
 
 .imagefile{
@@ -69,5 +70,16 @@
 }
 
 .ing, .steps{
-    margin-left:10px;
+    margin-left:10px;   
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+    text-align: center;
+    color:green;
+    font-size: 20px;
 }

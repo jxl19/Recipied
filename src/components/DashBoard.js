@@ -10,10 +10,10 @@ const history = createHistory()
 class DashBoard extends React.Component {
     handleClick(e) {
         e.preventDefault();
-        if (e.target.id === 'home') {
-            window.location.reload();
+        if(window.location.pathname.replace('/','') === e.target.id){
+            return;
         }
-        else {
+        else{
             this.props.dispatch(dbClicked(true));
             this.props.dispatch(loadTo(e.target.id));
         }
