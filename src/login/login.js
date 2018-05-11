@@ -16,7 +16,7 @@ class LogIn extends React.Component {
         }
     }
     renderResults() {
-        if(this.props.loginFailed) {
+        if (this.props.loginFailed) {
             return <p className="login-failed">Invalid Username or Password</p>
         }
         if (this.props.loading) {
@@ -51,10 +51,11 @@ class LogIn extends React.Component {
                         <div className="login">
                             <p><input type="text" ref={(input) => this.username = input} className="input-login" placeholder="User ID" size="35" required /></p>
                             <p><input type="password" ref={(input) => this.password = input} className="input-login" placeholder="Password" size="35" required /></p>
-                            <p className="login_button">
-                                <button className="signup-login-button" >Log In</button>
-                            </p>
-                            <div className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password <div className="sign_up" onClick={e => this.handleSignUp(e)}>Sign up</div></div>
+                            <div className="form-action">
+                                <div className="sign-up" onClick={e => this.handleSignUp(e)}>Sign up</div>
+                                <button className="login-button" >Log In</button>
+                            </div>
+                            <div className="demo"> Would you like to try a demo? <br /> Fill in 'demo' for login and password</div>
                         </div>
                     </form>
                     <div>
