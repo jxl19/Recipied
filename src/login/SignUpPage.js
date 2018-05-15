@@ -17,6 +17,9 @@ class SignUpPage extends React.Component {
         }
     }
     renderResults() {
+        if (this.props.signupFailed) {
+            return <p className="signup-failed">Username is being used</p>
+        }
         if (this.props.loading) {
             return <Spinner spinnerName="circle" noFadeIn />;
         }
@@ -75,7 +78,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.isLoggedIn,
-    loading: state.loading
+    loading: state.loading,
+    signupFailed: state.signupFailed
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

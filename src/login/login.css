@@ -40,28 +40,29 @@
 
 .input-login{
     height: 28px;
+    padding: 10px;
 }
 
 .form-action{
     width:100%;
 }
-.sign-up{
+.sign-up, .signup-login-button{
     display: inline-block;
-    border: 1px solid rgb(144, 249, 188);
-    background-color: rgb(144, 249, 188);
+    border: 1px solid #dcdcdc;
+    background-color: #dcdcdc;
     padding: 10px 18px;
-    margin-right:28%;
+    margin-right:36%;
 }
-.sign-up:hover{
-    text-decoration: underline;
-    color:white;
+.sign-up:hover, .signup-login-button:hover{
+    background-color: #ccc;
 }
 
-.sign-up, .login-button{
+.sign-up, .login-button, .signup-login-button{
     font-size:16px;
 }
 
 .demo {
+    margin-top:10px;
     font-weight: 900;
 }
 
