@@ -9,6 +9,7 @@ const initialState = {
     loadTo: '',
     isLoggedIn: false,
     loginFailed: false,
+    signupFailed: false,
     id: '',
     idSet: false,
     renderToPage: false,
@@ -147,6 +148,12 @@ export const loginFailed = () =>({
     payload: true
 })
 
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const signupFailed = () => ({
+    type: SIGNUP_FAILED,
+    payload: true
+})
+
 export const recipeReducer = (state = initialState, action) => {
     if (action.type === actions.REMOVE_STATE) {
         state = Object.assign({}, state, {
@@ -187,7 +194,12 @@ export const recipeReducer = (state = initialState, action) => {
     }
     if (action.type === actions.LOGIN_FAILED) {
         state = Object.assign({}, initialState, {
-            loginFailed: true
+            loginFailed: action.payload
+        })
+    }
+    if (action.type === actions.SIGNUP_FAILED) {
+        state = Object.assign({}, initialState, {
+            signupFailed: action.payload
         })
     }
     if (action.type === actions.GET_ID) {
@@ -318,6 +330,7 @@ export const createUser = (data) => (dispatch) => {
         })
         .then(res => {
             if (!res.ok) {
+                dispatch(signupFailed());
                 return Promise.reject(res.statusText);
             }
             dispatch(login(data))

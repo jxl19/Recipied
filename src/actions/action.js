@@ -121,3 +121,9 @@ export const loginFailed = () =>({
     type: LOGIN_FAILED,
     payload: true
 })
+
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const signupFailed = () => ({
+    type: SIGNUP_FAILED,
+    payload: true
+})
