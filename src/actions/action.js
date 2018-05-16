@@ -127,3 +127,9 @@ export const signupFailed = () => ({
     type: SIGNUP_FAILED,
     payload: true
 })
+
+export const UNMATCH_PASS = 'UNMATCH_PASS';
+export const unmatchPass = () => ({
+    type: UNMATCH_PASS,
+    payload: true
+})

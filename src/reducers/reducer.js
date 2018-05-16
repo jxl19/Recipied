@@ -27,7 +27,8 @@ const initialState = {
     token: '',
     loading: false,
     link: '',
-    linkCreated: false
+    linkCreated: false,
+    signupPassError: false
 }
 
 export const SEND_RECIPE = 'SEND_RECIPE';
@@ -151,6 +152,12 @@ export const loginFailed = () =>({
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const signupFailed = () => ({
     type: SIGNUP_FAILED,
+    payload: true
+})
+
+export const UNMATCH_PASS = 'UNMATCH_PASS';
+export const unmatchPass = () => ({
+    type: UNMATCH_PASS,
     payload: true
 })
 
@@ -280,6 +287,12 @@ export const recipeReducer = (state = initialState, action) => {
         state = Object.assign({}, state, {
             link: action.payload,
             linkCreated: true
+        })
+        return state;
+    }
+    if(action.type === actions.UNMATCH_PASS) {
+        state = Object.assign({}, state, {
+            signupPassError: action.payload
         })
         return state;
     }
