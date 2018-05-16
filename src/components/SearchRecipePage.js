@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { searchRecipe, createBitlyLink } from '../reducers/reducer';
 import DashBoard from './DashBoard';
-import { API_BASE_URL } from '../config';
 import './SearchRecipePage.css'
 
 class SearchRecipePage extends React.Component {
@@ -40,9 +39,9 @@ class SearchRecipePage extends React.Component {
         function splitString(str) {
             removeArr(str);
             var arr = [];
-            let split;
+            // let split;
             for (var i = 0; i < newStr.length; i++) {
-                split = newStr[i].replace('↵', '');
+                // split = newStr[i].replace('↵', '');
                 if (newStr[i] !== '') {
                     arr.push(newStr[i].split(/\n|\r|↵/).join(''));
                 }

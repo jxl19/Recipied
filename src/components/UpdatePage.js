@@ -4,7 +4,6 @@ import { searchRecipe, updateRecipe } from '../reducers/reducer';
 import {removeState} from '../actions/action';
 import {Redirect} from 'react-router-dom';
 import DashBoard from './DashBoard';
-import { API_BASE_URL } from '../config';
 import ImageUpload from './ImageUpload';
 import './UpdatePage.css';
 
@@ -68,8 +67,9 @@ class UpdatePage extends React.Component {
                 let steps = recipe.steps.map(steps => {
                     return <textarea className='update-step' id="step" key={i} defaultValue={steps} onChange={this.handleChange.bind(this)} ref={(input) => this.step = input} ></textarea>
                 })
-                let test = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
-                let image = <img className='imagefile'src={test} />
+                let photo = `https://s3-us-west-1.amazonaws.com/recipied/uploads/${recipe.image}`;
+                let alt_image = `${recipe.dishName}`
+                let image = <img className='imagefile'src={photo} alt={alt_image}/>
                 return (
                         <div className='card' key={i}>
                             <section className='card-block'>

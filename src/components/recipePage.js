@@ -56,9 +56,9 @@ class RecipePage extends React.Component {
         function splitString(str) {
             removeArr(str);
             var arr = [];
-            let split;
+            // let split;
             for (var i = 0; i < newStr.length; i++) {
-                split = newStr[i].replace('↵', '');
+                // split = newStr[i].replace('↵', '');
                 if (newStr[i] !== '') {
                     arr.push(newStr[i].split(/\n|\r|↵/).join( '' ));
                 }
@@ -72,7 +72,7 @@ class RecipePage extends React.Component {
             }
             return addedHTML;
         }
-        var userid = sessionStorage.getItem('id');
+        // var userid = sessionStorage.getItem('id');
         let recipes = undefined;
         let tableWidth = this.state.width * 0.98;
         let columnWidth = this.state.width * 0.49;

@@ -19,11 +19,11 @@ class AddRecipePage extends React.Component {
         this.props.dispatch(submitRecipe(recipeName, ingredient, calories, steps, id, userid));
     }
     handleKeyPress = (event) => {
-        if(event.key == 'Enter' && this.ingredientInput.value !== ''){
+        if(event.key === 'Enter' && this.ingredientInput.value !== ''){
           this.ingredientBox.value = this.ingredientBox.value +'-'+ this.ingredientInput.value + "\n";
           this.ingredientInput.value = '';
         }
-        if(event.key == 'Enter' && this.stepInput.value !== '') {
+        if(event.key === 'Enter' && this.stepInput.value !== '') {
             this.stepBox.value = this.stepBox.value +'-'+ this.stepInput.value + "\n";
             this.stepInput.value = '';
         }
