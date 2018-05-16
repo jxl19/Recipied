@@ -77,6 +77,6 @@
     background-color:#64B5F6;
 }
 
-.login-failed, .signup-failed{
+.login-failed, .signup-failed, .signup-pass-error{
     color:red;
 }

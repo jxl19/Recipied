@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { createUser } from '../reducers/reducer';
+import { createUser, unmatchPass } from '../reducers/reducer';
 import { Redirect } from 'react-router-dom';
 import Spinner from 'react-spinkit';
 import './login.css';
@@ -20,8 +20,11 @@ class SignUpPage extends React.Component {
         if (this.props.signupFailed) {
             return <p className="signup-failed">Username is being used</p>
         }
-        if (this.props.loading) {
+        else if (this.props.loading) {
             return <Spinner spinnerName="circle" noFadeIn />;
+        }
+        else if (this.props.signupPassError) {
+            return <p className="signup-pass-error">Passwords do not match</p>
         }
     }
     handleSubmit(e) {
@@ -33,7 +36,7 @@ class SignUpPage extends React.Component {
             })
         }
         else {
-            window.alert('passwords do not match');
+            return this.props.unmatchPass();
         }
     }
 
@@ -72,14 +75,18 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(createUser(attributes));
     },
     gotoSignup: () => dispatch(push('/signup')),
-    goToHomePage: () => dispatch(push('/homepage'))
+    goToHomePage: () => dispatch(push('/homepage')),
+    unmatchPass: () =>{
+        dispatch(unmatchPass());
+    }
 })
 
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.isLoggedIn,
     loading: state.loading,
-    signupFailed: state.signupFailed
+    signupFailed: state.signupFailed,
+    signupPassError: state.signupPassError
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
