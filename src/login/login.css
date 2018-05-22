@@ -41,6 +41,7 @@
 .input-login{
     height: 28px;
     padding: 10px;
+    border: 1px solid gainsboro;
 }
 
 .form-action{
@@ -51,7 +52,7 @@
     border: 1px solid #dcdcdc;
     background-color: #dcdcdc;
     padding: 10px 18px;
-    margin-right:36%;
+    margin-right:35.5%;
 }
 .sign-up:hover, .signup-login-button:hover{
     background-color: #ccc;
