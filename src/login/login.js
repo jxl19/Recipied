@@ -26,7 +26,7 @@ class LogIn extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         return this.props.login({
-            username: this.username.value,
+            username: this.username.value.toLowerCase(),
             password: this.password.value
         })
     }
